@@ -35,3 +35,8 @@ export const resetPassword = async ( data : any) => {
   const res = await api.post(`/auth/reset-password/${data.token}`,{ password: data.password });
   return res;
 };
+
+export const googleAuth = async (token: string | undefined) => {
+  const res = await api.post("/auth/google/login", { token });
+  return res;
+};

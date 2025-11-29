@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { getMyDetials, logIn } from "../services/auth";
 import { useAuth } from "../Context/authContext";
 import signupImage from "../assets/signup.png";
+import { GoogleLogin } from "@react-oauth/google";
+import { googleAuth } from "../services/auth";
 
 function Login() {
   const navigate = useNavigate();
@@ -126,6 +128,31 @@ function Login() {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        <div className="mt-4 flex py-3.5 justify-center">
+          <div className="w-[300px]">
+            {" "}
+            {/* Change width as you want */}
+            <GoogleLogin
+              onSuccess={async (credentialResponse) => {
+                console.log(credentialResponse);
+                try {
+                  const res = await googleAuth(credentialResponse.credential);
+                  localStorage.setItem(
+                    "accessToken",
+                    res.data.data.accessToken
+                  );
+                  navigate("/app/dashboard");
+                } catch (err) {
+                  console.log("Google Login Failed", err);
+                }
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+          </div>
+        </div>
 
         <p className="mt-8 text-center text-gray-500 text-sm">
           Don't have an account?{" "}
