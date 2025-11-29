@@ -25,3 +25,13 @@ export const refreshTokens = async () => {
   const res = await api.post("/auth/refresh", {},{ withCredentials: true });
   return res.data;
 };
+
+export const forgotPassword = async ( data : any) => {
+  const res = await api.post("/auth/forgot-password",  data );
+  return res;
+};
+
+export const resetPassword = async ( data : any) => {
+  const res = await api.post(`/auth/reset-password/${data.token}`,{ password: data.password });
+  return res;
+};

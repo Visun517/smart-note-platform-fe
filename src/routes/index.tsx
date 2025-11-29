@@ -16,12 +16,12 @@ const Explanation = lazy(() => import("../pages/Exaplanation"));
 const Summary = lazy(() => import("../pages/Summary"));
 const Quiz = lazy(() => import("../pages/Quiz"));
 const FlashCard = lazy(() => import("../pages/FlashCards"));
+const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"));
+const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"));
 import type { ReactNode } from "react";
-
-
 import AppShell from "../commponents/AppShell"; // your sidebar + navbar layout
-
 import { Navigate } from "react-router-dom";
+
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const token = localStorage.getItem("accessToken");
@@ -45,6 +45,8 @@ function Router() {
         <Routes>
           <Route path="/" element={<WelCome />} />
           <Route path="auth/login" element={<Login />} />
+          <Route path="auth/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} /> 
           <Route path="auth/signup" element={<SignUp />} />
 
           <Route
