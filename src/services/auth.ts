@@ -40,3 +40,8 @@ export const googleAuth = async (token: string | undefined) => {
   const res = await api.post("/auth/google/login", { token });
   return res;
 };
+
+export const logOut = async () => {
+  const res = await api.post("/auth/logout");
+  return res;
+};

@@ -1,9 +1,80 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  LayoutDashboard,
+  FileText,
+  PlusCircle,
+  BookOpen ,
+  HelpCircle ,
+  Layers ,
+  Settings,
+  LogOut,
+  Notebook 
+} from "lucide-react";
+import { useAuth } from "../Context/authContext";
+import { logOut } from "../services/auth";
 
+const SideBar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
 
-function SideBar() {
+  const menuItems = [
+    { path: "/app/dashboard", name: "Overview", icon: LayoutDashboard },
+    { path: "/app/notes", name: "My Notes", icon: FileText },
+    { path: "/app/notes/new", name: "Create Note", icon: PlusCircle },
+    { path: "/app/ai/:id/summary", name: "Summary", icon: Notebook },
+    { path: "/app/ai/:id/explanation", name: "Explanation", icon: BookOpen },
+    { path: "/app/ai/:id/quiz", name: "Quiz", icon: HelpCircle },
+    { path: "/app/ai/:id/flashcards", name: "Flashcards", icon: Layers }, 
+    { path: "/app/profile", name: "Settings", icon: Settings },
+  ];
+
+  const handleLogout = async () => {
+    localStorage.removeItem("accessToken");
+    setUser(null);
+    const res = await logOut();
+    console.log(res)
+    navigate("/auth/login");
+  };
+
   return (
-    <div>SideBar</div>
-  )
-}
+    <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-100 fixed left-0 top-20 h-[calc(100vh-5rem)] z-40 overflow-y-auto">
+      {/* Navigation Links */}
+      <div className="flex-1 py-6 px-4 space-y-2">
+        {menuItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium ${
+                isActive
+                  ? "bg-blue-50 text-blue-600"
+                  : "text-gray-500 hover:bg-gray-50"
+              }`}
+            >
+              <item.icon
+                size={20}
+                className={isActive ? "text-blue-600" : "text-gray-400"}
+              />
+              <span>{item.name}</span>
+            </Link>
+          );
+        })}
+      </div>
 
-export default SideBar
+      {/* Logout Button */}
+      <div className="p-4 border-t border-gray-50">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-red-500 hover:bg-red-50 transition-colors font-medium" 
+        >
+          <LogOut size={20} />
+          <span>Log Out</span>
+        </button>
+      </div>
+    </aside>
+  );
+};
+
+export default SideBar;

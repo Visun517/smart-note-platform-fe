@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const WelCome = lazy(() => import("../pages/WelCome"));
 const AiWorkSpace = lazy(() => import("../pages/AiWorkSpace"));
-const Analytics = lazy(() => import("../pages/Analytics"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const Login = lazy(() => import("../pages/Login"));
 const NoteEdit = lazy(() => import("../pages/NoteEdit"));
@@ -77,9 +76,8 @@ function Router() {
               </Route>
             </Route>
 
-            <Route path="analytics" element={<Analytics />} />
             <Route path="profile" element={<Profile />} />
-          </Route>
+          </Route>  
         </Routes>
       </Suspense>
     </BrowserRouter>
