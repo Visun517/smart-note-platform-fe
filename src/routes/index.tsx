@@ -5,11 +5,10 @@ const WelCome = lazy(() => import("../pages/WelCome"));
 const AiWorkSpace = lazy(() => import("../pages/AiWorkSpace"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const Login = lazy(() => import("../pages/Login"));
-const NoteEdit = lazy(() => import("../pages/NoteEdit"));
-const NoteView = lazy(() => import("../pages/NoteView"));
+const NoteView = lazy(() => import("../commponents/NoteView"));
 const Profile = lazy(() => import("../pages/Profile"));
 const SignUp = lazy(() => import("../pages/SingUp"));
-const NoteList = lazy(() => import("../pages/NoteList"));
+const NoteList = lazy(() => import("../pages/Notes"));
 const CreateNote = lazy(() => import("../pages/CreateNote"));
 const Explanation = lazy(() => import("../pages/Exaplanation"));
 const Summary = lazy(() => import("../pages/Summary"));
@@ -63,7 +62,7 @@ function Router() {
               <Route path="new" element={<CreateNote />} />
               <Route path=":id">
                 <Route index element={<NoteView />} />
-                <Route path="edit" element={<NoteEdit />} />
+                <Route path="edit" element={<CreateNote />} />
               </Route>
             </Route>
 
