@@ -10,7 +10,7 @@ export const getAllNotes = async (page = 1, limit = 10) => {
   return res;
 };
 
-export const getNoteById = async (id: string) => {
+export const getNoteById = async (id: string | undefined) => {
   const res = await api.get(`/note/user/${id}`);
   return res;
 };

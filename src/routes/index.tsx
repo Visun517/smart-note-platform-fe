@@ -10,10 +10,6 @@ const Profile = lazy(() => import("../pages/Profile"));
 const SignUp = lazy(() => import("../pages/SingUp"));
 const NoteList = lazy(() => import("../pages/Notes"));
 const CreateNote = lazy(() => import("../pages/CreateNote"));
-const Explanation = lazy(() => import("../pages/Exaplanation"));
-const Summary = lazy(() => import("../pages/Summary"));
-const Quiz = lazy(() => import("../pages/Quiz"));
-const FlashCard = lazy(() => import("../pages/FlashCards"));
 const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"));
 const TrashBin = lazy(() => import("../pages/TrashBin"));
@@ -67,14 +63,7 @@ function Router() {
               </Route>
             </Route>
 
-            <Route path="ai">
-              <Route path=":id" element={<AiWorkSpace />}>
-                <Route path="summary" element={<Summary />} />
-                <Route path="explanation" element={<Explanation />} />
-                <Route path="quiz" element={<Quiz />} />
-                <Route path="flashcards" element={<FlashCard />} />
-              </Route>
-            </Route>
+           <Route path="ai-workspace/:id" element={<AiWorkSpace />} />
 
             <Route path="trash" element={<TrashBin />} />
             <Route path="profile" element={<Profile />} />

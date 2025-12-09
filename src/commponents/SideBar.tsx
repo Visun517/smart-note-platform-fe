@@ -3,13 +3,10 @@ import {
   LayoutDashboard,
   FileText,
   PlusCircle,
-  BookOpen ,
-  HelpCircle ,
-  Layers ,
   Settings,
   LogOut,
-  Notebook, 
-  Trash
+  Trash,
+  SpaceIcon
 } from "lucide-react";
 import { useAuth } from "../Context/authContext";
 import { logOut } from "../services/auth";
@@ -23,10 +20,7 @@ const SideBar = () => {
     { path: "/app/dashboard", name: "Overview", icon: LayoutDashboard },
     { path: "/app/notes", name: "My Notes", icon: FileText },
     { path: "/app/notes/new", name: "Create Note", icon: PlusCircle },
-    { path: "/app/ai/:id/summary", name: "Summary", icon: Notebook },
-    { path: "/app/ai/:id/explanation", name: "Explanation", icon: BookOpen },
-    { path: "/app/ai/:id/quiz", name: "Quiz", icon: HelpCircle },
-    { path: "/app/ai/:id/flashcards", name: "Flashcards", icon: Layers },
+    { path: "/app/ai-workspace/:id", name: "Ai Workspace", icon: SpaceIcon },
     { path: "/app/trash", name: "Trash Bin", icon: Trash }, 
     { path: "/app/profile", name: "Settings", icon: Settings },
   ];
