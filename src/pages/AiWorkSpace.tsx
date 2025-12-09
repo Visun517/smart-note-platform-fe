@@ -9,13 +9,13 @@ import FlashcardsView from "../commponents/FlashCards";
 import { getNoteById } from "../services/note";
 
 const AiWorkspace = () => {
-  const { noteId } = useParams();
+  const { id } = useParams();
   const [activeTab, setActiveTab] = useState("summary");
   const [noteData, setNoteData] = useState(null);
 
   useEffect(() => {
-    fetchNoteById(noteId)
-  }, [noteId]);
+    fetchNoteById(id)
+  }, [id]);
 
   const fetchNoteById = async (id: string | undefined) => {
       const note = await getNoteById(id);
@@ -59,10 +59,10 @@ const AiWorkspace = () => {
 
       {/* --- 2. Dynamic Content Area --- */}
       <div className="flex-1 p-6 overflow-y-auto">
-        {activeTab === 'summary' && <SummaryView noteId={noteId} />}
-        {activeTab === 'explanation' && <ExplanationView noteId={noteId} />}
-        {activeTab === 'quiz' && <QuizView noteId={noteId} />}
-        {activeTab === 'flashcards' && <FlashcardsView noteId={noteId} />}
+        {activeTab === 'summary' && <SummaryView noteId={id} />}
+        {activeTab === 'explanation' && <ExplanationView noteId={id} />}
+        {activeTab === 'quiz' && <QuizView noteId={id} />}
+        {activeTab === 'flashcards' && <FlashcardsView noteId={id} />}
       </div>
 
     </div>

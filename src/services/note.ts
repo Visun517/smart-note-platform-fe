@@ -11,6 +11,7 @@ export const getAllNotes = async (page = 1, limit = 10) => {
 };
 
 export const getNoteById = async (id: string | undefined) => {
+  console.log(id)
   const res = await api.get(`/note/user/${id}`);
   return res;
 };
