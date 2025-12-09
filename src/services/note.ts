@@ -22,7 +22,7 @@ export const updateNoteById = async (id: string, data: any) => {
 
 
 export const deleteNoteId = async (id: string) => {
-  const res = await api.delete(`/note/delete/${id}`);
+  const res = await api.patch(`/note/delete/${id}`);
   return res;
 };
 
@@ -35,3 +35,18 @@ export const getNotesBysubId = async (id: string) => {
   const res = await api.get(`/note/note/subject/${id}`);
   return res;
 }
+
+export const getTrashedNotes = async (page = 1, limit = 10) => {
+  const res = api.get(`/note/trashed?page=${page}&limit=${limit}`);
+  return res;
+};
+
+export const restoreNote = async (id: string) => {
+  const res = await api.patch(`/note/restore/${id}`);
+  return res;
+};
+
+export const deleteNotePermanently = async (id: string) => {
+  const res = await api.delete(`/note/delete/permanently/${id}`);
+  return res;
+};

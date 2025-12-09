@@ -8,7 +8,8 @@ import {
   Layers ,
   Settings,
   LogOut,
-  Notebook 
+  Notebook, 
+  Trash
 } from "lucide-react";
 import { useAuth } from "../Context/authContext";
 import { logOut } from "../services/auth";
@@ -25,7 +26,8 @@ const SideBar = () => {
     { path: "/app/ai/:id/summary", name: "Summary", icon: Notebook },
     { path: "/app/ai/:id/explanation", name: "Explanation", icon: BookOpen },
     { path: "/app/ai/:id/quiz", name: "Quiz", icon: HelpCircle },
-    { path: "/app/ai/:id/flashcards", name: "Flashcards", icon: Layers }, 
+    { path: "/app/ai/:id/flashcards", name: "Flashcards", icon: Layers },
+    { path: "/app/trash", name: "Trash Bin", icon: Trash }, 
     { path: "/app/profile", name: "Settings", icon: Settings },
   ];
 

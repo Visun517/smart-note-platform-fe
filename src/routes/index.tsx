@@ -16,6 +16,7 @@ const Quiz = lazy(() => import("../pages/Quiz"));
 const FlashCard = lazy(() => import("../pages/FlashCards"));
 const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"));
+const TrashBin = lazy(() => import("../pages/TrashBin"));
 import type { ReactNode } from "react";
 import AppShell from "../commponents/AppShell"; // your sidebar + navbar layout
 import { Navigate } from "react-router-dom";
@@ -75,6 +76,7 @@ function Router() {
               </Route>
             </Route>
 
+            <Route path="trash" element={<TrashBin />} />
             <Route path="profile" element={<Profile />} />
           </Route>  
         </Routes>
