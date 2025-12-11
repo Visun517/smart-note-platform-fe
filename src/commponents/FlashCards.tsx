@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Layers, RefreshCw, AlertCircle, RotateCw } from "lucide-react";
 import { getFlasCards } from "../services/ai"; // Service import
 
 interface FlashCardsViewProps {
   noteId: string | undefined;
+  flashcardProps: any;
 }
 
 interface IFlashcard {
@@ -13,13 +14,24 @@ interface IFlashcard {
   noteId: string;
 }
 
-function FlashCards({ noteId }: FlashCardsViewProps) {
-  
+function FlashCards({ noteId, flashcardProps }: FlashCardsViewProps) {
+  console.log(flashcardProps);
+
   const [cards, setCards] = useState<IFlashcard[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
+
   const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+if (flashcardProps) {
+      if (Array.isArray(flashcardProps)) {
+        setCards(flashcardProps);
+      } 
+      else if (typeof flashcardProps === 'object') {
+        setCards([flashcardProps]); 
+      }
+    }  }, [flashcardProps]);
 
   // Generate Function
   const handleGenerate = async () => {
@@ -27,7 +39,7 @@ function FlashCards({ noteId }: FlashCardsViewProps) {
 
     setLoading(true);
     setError("");
-    setCards([]); 
+    setCards([]);
 
     try {
       const res = await getFlasCards(noteId);
@@ -43,13 +55,12 @@ function FlashCards({ noteId }: FlashCardsViewProps) {
   const handleFlip = (id: string) => {
     setFlippedCards((prev) => ({
       ...prev,
-      [id]: !prev[id], 
+      [id]: !prev[id],
     }));
   };
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 pb-10">
-      
       {/* --- Header Section --- */}
       <div className="flex justify-between items-center bg-orange-50 p-4 rounded-xl border border-orange-100">
         <div className="flex items-center gap-3">
@@ -58,7 +69,9 @@ function FlashCards({ noteId }: FlashCardsViewProps) {
           </div>
           <div>
             <h2 className="text-lg font-bold text-gray-800">Flashcards</h2>
-            <p className="text-sm text-gray-500">Test your knowledge with active recall.</p>
+            <p className="text-sm text-gray-500">
+              Test your knowledge with active recall.
+            </p>
           </div>
         </div>
 
@@ -73,7 +86,8 @@ function FlashCards({ noteId }: FlashCardsViewProps) {
             </>
           ) : (
             <>
-              <Layers size={18} /> {cards.length > 0 ? "Regenerate Cards" : "Generate Cards"}
+              <Layers size={18} />{" "}
+              {cards.length > 0 ? "Regenerate Cards" : "Generate Cards"}
             </>
           )}
         </button>
@@ -96,42 +110,48 @@ function FlashCards({ noteId }: FlashCardsViewProps) {
             const isFlipped = flippedCards[card._id];
 
             return (
-              <div 
+              <div
                 key={card._id}
                 onClick={() => handleFlip(card._id)}
                 className="group h-64 perspective-1000 cursor-pointer"
               >
                 {/* Inner Container (Rotation Logic) */}
-                <div 
+                <div
                   className={`relative w-full h-full transition-all duration-500 transform-style-3d shadow-sm group-hover:shadow-md rounded-2xl
                     ${isFlipped ? "rotate-y-180" : ""}
                   `}
                 >
-                  
                   {/* --- FRONT SIDE (Question) --- */}
                   <div className="absolute w-full h-full backface-hidden bg-white border border-gray-200 rounded-2xl p-6 flex flex-col justify-between">
                     <div className="flex justify-between items-start">
-                        <span className="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-1 rounded uppercase">Question</span>
-                        <RotateCw size={16} className="text-gray-300" />
+                      <span className="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-1 rounded uppercase">
+                        Question
+                      </span>
+                      <RotateCw size={16} className="text-gray-300" />
                     </div>
                     <p className="text-lg font-semibold text-gray-800 text-center">
-                        {card.front}
+                      {card.front}
                     </p>
-                    <p className="text-xs text-gray-400 text-center mt-2">Click to flip</p>
+                    <p className="text-xs text-gray-400 text-center mt-2">
+                      Click to flip
+                    </p>
                   </div>
 
                   {/* --- BACK SIDE (Answer) --- */}
                   <div className="absolute w-full h-full backface-hidden bg-orange-50 border border-orange-200 rounded-2xl p-6 flex flex-col justify-between rotate-y-180">
                     <div className="flex justify-between items-start">
-                        <span className="bg-green-100 text-green-600 text-xs font-bold px-2 py-1 rounded uppercase">Answer</span>
-                        <RotateCw size={16} className="text-orange-300" />
+                      <span className="bg-green-100 text-green-600 text-xs font-bold px-2 py-1 rounded uppercase">
+                        Answer
+                      </span>
+                      <RotateCw size={16} className="text-orange-300" />
                     </div>
                     <p className="text-base text-gray-700 text-center leading-relaxed">
-                        {card.back}
+                      {card.back}
                     </p>
-                    <p className="text-xs text-orange-400 text-center mt-2">Click to flip back</p>
+                    <p className="text-xs text-orange-400 text-center mt-2">
+                      Click to flip back
+                    </p>
                   </div>
-
                 </div>
               </div>
             );
@@ -146,7 +166,6 @@ function FlashCards({ noteId }: FlashCardsViewProps) {
           <p>Click "Generate Cards" to create flashcards from your note.</p>
         </div>
       )}
-
     </div>
   );
 }

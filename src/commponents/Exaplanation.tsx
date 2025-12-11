@@ -1,16 +1,27 @@
-import { useState } from "react";
-import { BookOpen, RefreshCw, AlertCircle, Copy, Check, Lightbulb } from "lucide-react";
-import { getExplanation } from "../services/ai"; 
+import { useEffect, useState } from "react";
+import {
+  BookOpen,
+  RefreshCw,
+  AlertCircle,
+  Copy,
+  Check,
+  Lightbulb,
+} from "lucide-react";
+import { getExplanation } from "../services/ai";
 interface ExplanationViewProps {
   noteId: string | undefined;
+  explanationProps: any;
 }
 
-function Explanation({ noteId }: ExplanationViewProps) {
-  
+function Explanation({ noteId, explanationProps }: ExplanationViewProps) {
   const [explanation, setExplanation] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setExplanation(explanationProps?.explanation || '');
+  }, [explanationProps]);
 
   const handleGenerate = async () => {
     if (!noteId) return;
@@ -21,8 +32,8 @@ function Explanation({ noteId }: ExplanationViewProps) {
 
     try {
       const res = await getExplanation(noteId);
-      console.log(res)
-      setExplanation(res.data.explanation); 
+      console.log(res);
+      setExplanation(res.data.explanation);
     } catch (err) {
       console.error(err);
       setError("Failed to generate explanation. Please try again.");
@@ -39,7 +50,6 @@ function Explanation({ noteId }: ExplanationViewProps) {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      
       {/* --- Header Section (Blue Theme) --- */}
       <div className="flex justify-between items-center bg-blue-50 p-4 rounded-xl border border-blue-100">
         <div className="flex items-center gap-3">
@@ -47,8 +57,12 @@ function Explanation({ noteId }: ExplanationViewProps) {
             <BookOpen size={24} />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-gray-800">Deep Explanation</h2>
-            <p className="text-sm text-gray-500">Understand complex concepts in detail.</p>
+            <h2 className="text-lg font-bold text-gray-800">
+              Deep Explanation
+            </h2>
+            <p className="text-sm text-gray-500">
+              Understand complex concepts in detail.
+            </p>
           </div>
         </div>
 
@@ -63,7 +77,8 @@ function Explanation({ noteId }: ExplanationViewProps) {
             </>
           ) : (
             <>
-              <Lightbulb size={18} /> {explanation ? "Regenerate" : "Explain Note"}
+              <Lightbulb size={18} />{" "}
+              {explanation ? "Regenerate" : "Explain Note"}
             </>
           )}
         </button>
@@ -82,17 +97,20 @@ function Explanation({ noteId }: ExplanationViewProps) {
       {/* 2. Success State (Content) */}
       {explanation && (
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          
           <div className="flex justify-between items-start mb-4">
             <h3 className="font-bold text-gray-700 flex items-center gap-2">
-                Detailed Breakdown:
+              Detailed Breakdown:
             </h3>
-            <button 
-                onClick={handleCopy}
-                className="text-gray-400 hover:text-gray-600 transition"
-                title="Copy to clipboard"
+            <button
+              onClick={handleCopy}
+              className="text-gray-400 hover:text-gray-600 transition"
+              title="Copy to clipboard"
             >
-                {copied ? <Check size={18} className="text-green-500"/> : <Copy size={18}/>}
+              {copied ? (
+                <Check size={18} className="text-green-500" />
+              ) : (
+                <Copy size={18} />
+              )}
             </button>
           </div>
 
@@ -100,7 +118,6 @@ function Explanation({ noteId }: ExplanationViewProps) {
           <div className="prose prose-blue max-w-none text-gray-700 leading-relaxed whitespace-pre-line">
             {explanation}
           </div>
-
         </div>
       )}
 
@@ -111,7 +128,6 @@ function Explanation({ noteId }: ExplanationViewProps) {
           <p>Click "Explain Note" to get a detailed breakdown.</p>
         </div>
       )}
-
     </div>
   );
 }

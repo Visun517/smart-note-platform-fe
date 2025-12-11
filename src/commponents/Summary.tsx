@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Sparkles, RefreshCw, AlertCircle, Copy, Check } from "lucide-react";
-import { getSummary } from "../services/ai"; // Service එක import කරන්න
-
+import { getSummary } from "../services/ai";
 interface SummaryViewProps {
   noteId: string | undefined;
+  summaryProps: any;  
 }
 
-// ⚠️ නිවැරදි කිරීම: props ගන්නකොට { noteId } ලෙස destructure කරන්න ඕන.
-function Summary({ noteId }: SummaryViewProps) {
-  
+function Summary({ noteId , summaryProps}: SummaryViewProps ) {
   const [summary, setSummary] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
 
-  // Summary Generate කරන Function එක
+  useEffect(() => {
+    setSummary(summaryProps?.summaryText || "");
+  } , [summaryProps]);
+
   const handleGenerateSummary = async () => {
     if (!noteId) return;
 
@@ -25,9 +26,6 @@ function Summary({ noteId }: SummaryViewProps) {
     try {
       // Backend request
       const res = await getSummary(noteId);
-      
-      // Backend එකෙන් එන response structure එක අනුව මෙය වෙනස් කරන්න
-      // උදා: res.data.summary හෝ res.data.data
       setSummary(res.data.summary); 
 
     } catch (err) {

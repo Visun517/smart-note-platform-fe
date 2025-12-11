@@ -6,7 +6,6 @@ import {
   Settings,
   LogOut,
   Trash,
-  SpaceIcon
 } from "lucide-react";
 import { useAuth } from "../Context/authContext";
 import { logOut } from "../services/auth";
@@ -20,7 +19,6 @@ const SideBar = () => {
     { path: "/app/dashboard", name: "Overview", icon: LayoutDashboard },
     { path: "/app/notes", name: "My Notes", icon: FileText },
     { path: "/app/notes/new", name: "Create Note", icon: PlusCircle },
-    { path: "/app/ai-workspace/:id", name: "Ai Workspace", icon: SpaceIcon },
     { path: "/app/trash", name: "Trash Bin", icon: Trash }, 
     { path: "/app/profile", name: "Settings", icon: Settings },
   ];

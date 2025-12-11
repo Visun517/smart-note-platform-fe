@@ -51,3 +51,8 @@ export const deleteNotePermanently = async (id: string) => {
   const res = await api.delete(`/note/delete/permanently/${id}`);
   return res;
 };
+
+export const searchNotes = async (query: string) => {
+  const res = await api.get(`/note/search?q=${query}`);
+  return res;
+};

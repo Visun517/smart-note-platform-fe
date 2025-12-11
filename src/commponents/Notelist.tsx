@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   FileText,
   Trash2,
@@ -11,11 +11,12 @@ import {
   ChevronRight,
   Sparkles,
 } from "lucide-react";
-import { getAllNotes, deleteNoteId } from "../services/note";
+import { getAllNotes, deleteNoteId, searchNotes } from "../services/note";
 
 const NoteList = () => {
   const navigate = useNavigate();
-
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search");
   const [notes, setNotes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -23,18 +24,28 @@ const NoteList = () => {
   const LIMIT = 9;
 
   useEffect(() => {
-    fetchNotes();
-  }, [page]);
+    fetchData();
+  }, [page, searchQuery]); 
 
-  const fetchNotes = async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
-      const res = await getAllNotes(page, LIMIT);
+      let res;
 
-      setNotes(res.data.notes);
-      setTotalPages(res.data.totalPages);
+      if (searchQuery) {
+        console.log("Searching:", searchQuery);
+        res = await searchNotes(searchQuery);
+        setNotes(res.data.notes);
+        setTotalPages(1); 
+      } else {
+        // B. Normal Fetch
+        res = await getAllNotes(page, LIMIT);
+        setNotes(res.data.notes);
+        setTotalPages(res.data.totalPages);
+      }
     } catch (error) {
       console.error("Failed to fetch notes", error);
+      setNotes([]);
     } finally {
       setLoading(false);
     }
@@ -48,7 +59,7 @@ const NoteList = () => {
     if (window.confirm("Are you sure you want to delete this note?")) {
       try {
         await deleteNoteId(id);
-        fetchNotes();
+        fetchData();
       } catch (error) {
         alert("Failed to delete note.");
       }
@@ -73,17 +84,32 @@ const NoteList = () => {
       {/* Header Section */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">My Notes 📚</h1>
+          <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+            {searchQuery ? `Search Results: "${searchQuery}"` : "My Notes 📚"}
+          </h1>
           <p className="text-gray-500 mt-1">
-            Manage and organize your study materials.
+            {searchQuery
+              ? `Found ${notes.length} notes`
+              : "Manage and organize your study materials."}
           </p>
         </div>
-        <Link
-          to="/app/notes/new"
-          className="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-blue-700 transition flex items-center gap-2 shadow-md"
-        >
-          <Plus size={20} /> Create Note
-        </Link>
+
+        {/* Clear Search Button */}
+        {searchQuery ? (
+          <button
+            onClick={() => navigate("/app/notes")}
+            className="text-red-500 font-semibold hover:underline"
+          >
+            Clear Search
+          </button>
+        ) : (
+          <Link
+            to="/app/notes/new"
+            className="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-blue-700 transition flex items-center gap-2 shadow-md"
+          >
+            <Plus size={20} /> Create Note
+          </Link>
+        )}
       </div>
 
       {/* --- CONTENT AREA --- */}
