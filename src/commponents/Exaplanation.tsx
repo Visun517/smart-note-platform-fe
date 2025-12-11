@@ -21,6 +21,7 @@ function Explanation({ noteId }: ExplanationViewProps) {
 
     try {
       const res = await getExplanation(noteId);
+      console.log(res)
       setExplanation(res.data.explanation); 
     } catch (err) {
       console.error(err);

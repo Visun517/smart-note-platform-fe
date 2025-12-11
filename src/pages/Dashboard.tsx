@@ -47,7 +47,7 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-[80vh]">
+      <div className="flex items-center justify-center h-[80vh] ">
           <div className=" w-[100px] h-[100px] border-4 border-blue-500 border-b-transparent rounded-full animate-spin"></div>
       </div>
     );
@@ -56,7 +56,7 @@ const Dashboard = () => {
   // --- 2. Error State ---
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center h-[60vh] text-red-500">
+      <div className="flex flex-col items-center justify-center h-[60vh] text-red-500 ">
         <p className="text-xl font-semibold">Oops! Something went wrong.</p>
         <button
           onClick={() => window.location.reload()}
@@ -71,7 +71,7 @@ const Dashboard = () => {
   // --- 3. Empty State (No Notes yet) ---
   if (data?.totals?.notes === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-[80vh] text-center px-4">
+      <div className="flex flex-col items-center justify-center h-[80vh] text-center px-4 ">
         <div className="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center text-4xl mb-6">
           📝
         </div>
@@ -83,7 +83,7 @@ const Dashboard = () => {
           get AI summaries and quizzes!
         </p>
         <Link
-          to="/app/create-note"
+          to="/app/notes/new"
           className="bg-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 hover:shadow-blue-200 transition transform active:scale-95"
         >
           Create First Note 🚀
@@ -94,7 +94,7 @@ const Dashboard = () => {
 
   // --- 4. Main Dashboard UI ---
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 animate-fade-in bg-gray-200">
+    <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 animate-fade-in bg-gray-200 ">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
@@ -106,7 +106,7 @@ const Dashboard = () => {
           </p>
         </div>
         <Link
-          to="/app/create-note"
+          to="/app/notes/new"
           className="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-blue-700 transition shadow-md flex items-center gap-2"
         >
           <span>+</span> Create Note
@@ -114,7 +114,7 @@ const Dashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
         <StatsCard
           title="Total Notes"
           count={data.totals.notes}
@@ -145,7 +145,7 @@ const Dashboard = () => {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
         {/* Chart 1: Notes Creation Trend */}
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <h3 className="text-lg font-bold text-gray-800 mb-6">
@@ -184,8 +184,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Chart 2: Quiz Performance Trend */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+        {/* Chart 2: Quiz Performance Trend */} 
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 ">
           <h3 className="text-lg font-bold text-gray-800 mb-6">
             Quiz Activity & Avg Score
           </h3>

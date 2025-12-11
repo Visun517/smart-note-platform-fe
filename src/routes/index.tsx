@@ -6,7 +6,7 @@ const AiWorkSpace = lazy(() => import("../pages/AiWorkSpace"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const Login = lazy(() => import("../pages/Login"));
 const NoteView = lazy(() => import("../commponents/NoteView"));
-const Profile = lazy(() => import("../pages/Profile"));
+const Profile = lazy(() => import("../pages/ProfilePage"));
 const SignUp = lazy(() => import("../pages/SingUp"));
 const NoteList = lazy(() => import("../pages/Notes"));
 const CreateNote = lazy(() => import("../pages/CreateNote"));
