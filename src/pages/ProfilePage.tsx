@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { User, Mail, Lock, Camera, Save, Loader2 } from "lucide-react";
 import { useAuth } from "../Context/authContext";
 import { getUserDetails, profileUpload, updateUserDetails } from "../services/Profile";
+import toast from "react-hot-toast";
 
 function Profile() {
   const { user, setUser } = useAuth(); // Auth Context
@@ -35,7 +36,7 @@ function Profile() {
         });
         setPreviewImage(res.data.user.imageUrl || "");
       } catch (error) {
-        console.error("Failed to load profile", error);
+        toast.error("Something went wrong. Please try again.");
       }
     };
     fetchData();
@@ -45,7 +46,7 @@ function Profile() {
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.password) {
-      alert("Please enter your password to save changes.");
+      toast.error("Please enter your password to save changes.")
       return;
     }
 
@@ -53,10 +54,10 @@ function Profile() {
     try {
       const res = await updateUserDetails(formData);
       setUser(res.data.user);
-      alert("Profile updated successfully! ✅");
+      
       setFormData({ ...formData, password: "" });
     } catch (error) {
-      alert("Failed to update profile. Check your password.");
+      toast.error("Failed to update profile. Check your password.");
     } finally {
       setLoading(false);
     }
@@ -74,10 +75,8 @@ function Profile() {
     try {
       const res = await profileUpload(file);
       setUser(res.data.user);
-      alert("Profile picture updated! 📸");
     } catch (error) {
-      console.error(error);
-      alert("Failed to upload image.");
+      toast.error("Failed to upload image.");
     } finally {
       setImageLoading(false);
     }

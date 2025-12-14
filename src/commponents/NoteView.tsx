@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { 
-  ArrowLeft, 
-  Edit, 
-  Trash2, 
-  Calendar, 
-  Download, 
-  Clock 
+import {
+  ArrowLeft,
+  Edit,
+  Trash2,
+  Calendar,
+  Download,
+  Clock,
 } from "lucide-react";
 import { getNoteById, deleteNoteId, noteConvertToPdf } from "../services/note"; // Service functions
+import toast from "react-hot-toast";
 
 const NoteView = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [note, setNote] = useState<any>(null);
@@ -22,11 +23,10 @@ const NoteView = () => {
     const fetchNoteData = async () => {
       try {
         if (!id) return;
-        console.log(id)
         const res = await getNoteById(id);
         setNote(res.data.note);
       } catch (error) {
-        console.error("Error fetching note:", error);
+        toast.error("Failed to fetch note");
       } finally {
         setLoading(false);
       }
@@ -36,13 +36,17 @@ const NoteView = () => {
   }, [id]);
 
   const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this note? This action cannot be undone.")) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this note? This action cannot be undone."
+      )
+    ) {
       try {
         if (id) await deleteNoteId(id);
         alert("Note deleted successfully.");
         navigate("/app/notes");
       } catch (error) {
-        alert("Failed to delete note.");
+        toast.error("Failed to delete note");
       }
     }
   };
@@ -53,15 +57,14 @@ const NoteView = () => {
     setPdfLoading(true);
     try {
       const res = await noteConvertToPdf(id);
-      console.log(res)
+      console.log(res);
       if (res.data.pdfUrl) {
         window.open(res.data.pdfUrl, "_blank");
       } else {
-        alert("PDF generated but no URL returned.");
+        toast.error("Failed to generate PDF.");
       }
     } catch (error) {
-      console.error(error);
-      alert("Failed to generate PDF.");
+      toast.error("Failed to generate PDF.");
     } finally {
       setPdfLoading(false);
     }
@@ -90,7 +93,10 @@ const NoteView = () => {
     return (
       <div className="text-center mt-20">
         <h2 className="text-2xl font-bold text-gray-700">Note not found 😕</h2>
-        <Link to="/app/notes" className="text-blue-600 hover:underline mt-4 block">
+        <Link
+          to="/app/notes"
+          className="text-blue-600 hover:underline mt-4 block"
+        >
           Back to Notes
         </Link>
       </div>
@@ -99,10 +105,9 @@ const NoteView = () => {
 
   return (
     <div className="max-w-4xl mx-auto pb-20">
-      
       {/* --- TOP BAR (Back Button & Actions) --- */}
       <div className="flex justify-between items-center mb-8 sticky top-0 bg-gray-50/90 backdrop-blur-sm py-4 z-10">
-        <button 
+        <button
           onClick={() => navigate("/app/notes")}
           className="flex items-center gap-2 text-gray-500 hover:text-gray-800 transition font-medium"
         >
@@ -111,17 +116,17 @@ const NoteView = () => {
 
         <div className="flex gap-3">
           {/* PDF Button */}
-          <button 
+          <button
             onClick={handleDownloadPdf}
             disabled={pdfLoading}
             className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-100 transition shadow-sm disabled:opacity-50"
           >
-            <Download size={18} /> 
+            <Download size={18} />
             {pdfLoading ? "Generating..." : "Export PDF"}
           </button>
 
           {/* Edit Button */}
-          <button 
+          <button
             onClick={() => navigate(`/app/notes/${id}/edit`)}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md"
           >
@@ -129,7 +134,7 @@ const NoteView = () => {
           </button>
 
           {/* Delete Button */}
-          <button 
+          <button
             onClick={handleDelete}
             className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition"
             title="Delete Note"
@@ -141,13 +146,12 @@ const NoteView = () => {
 
       {/* --- NOTE CONTENT --- */}
       <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100 min-h-[60vh]">
-        
         {/* Header Info */}
         <div className="border-b border-gray-100 pb-6 mb-8">
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
             {note.title}
           </h1>
-          
+
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
             <div className="flex items-center gap-2">
               <Calendar size={16} />
@@ -157,18 +161,14 @@ const NoteView = () => {
               <Clock size={16} />
               <span>Last Updated: {formatDate(note.updatedAt)}</span>
             </div>
-            
           </div>
         </div>
 
-       
-        <div 
+        <div
           className="prose prose-lg max-w-none text-gray-700 prose-headings:text-gray-800 prose-a:text-blue-600 prose-img:rounded-xl"
           dangerouslySetInnerHTML={{ __html: note.html }}
         />
-
       </div>
-
     </div>
   );
 };

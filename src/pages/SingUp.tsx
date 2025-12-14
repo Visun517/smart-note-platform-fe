@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { signUp } from "../services/auth";
 import { useNavigate, Link } from "react-router-dom"; 
 import signupImage from "../assets/signup.png"; 
+import toast from "react-hot-toast";
 
 function SignUp() { 
 
@@ -32,8 +33,7 @@ function SignUp() {
       navigate('/auth/login');
 
     } catch (error) {
-      console.log(error);
-      alert("Registration failed. Please try again.");
+      toast.error("Registration failed. Please try again.");
     } finally {
       setLoading(false); 
     }

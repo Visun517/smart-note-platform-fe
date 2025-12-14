@@ -27,7 +27,6 @@ const SideBar = () => {
     localStorage.removeItem("accessToken");
     setUser(null);
     const res = await logOut();
-    console.log(res)
     navigate("/auth/login");
   };
 

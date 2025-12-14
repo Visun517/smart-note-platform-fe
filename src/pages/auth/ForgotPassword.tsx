@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import signupImage from "../../assets/signup.png";
 import { forgotPassword } from "../../services/auth";
+import toast from "react-hot-toast";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -12,24 +13,24 @@ function ForgotPassword() {
     e.preventDefault();
 
     if (email === "") {
-      alert("Please enter your email address.");
+      toast.error("Please enter your email.");
       return;
     }
 
     setLoading(true);
 
     try {
-      console.log(email)
+      console.log(email);
       const res = await forgotPassword({ email });
 
       if (res.status === 200 || res.data.success) {
         setIsSubmitted(true);
       } else {
-        alert("Failed to send email. Please try again.");
+        toast.error("Something went wrong. Please try again.");
       }
     } catch (error) {
       console.log(error);
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
       setLoading(false);
     }
   };

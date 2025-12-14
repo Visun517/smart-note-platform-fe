@@ -10,10 +10,8 @@ function WelCome() {
   return (
     <>
       <div className="min-h-screen bg-gray-200 flex flex-col font-sans">
-        {/* 1. Navbar එක */}
         <Navbar />
 
-        {/* 2. Hero Section (ප්‍රධාන කොටස) */}
         <header className="flex-grow flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 py-12 md:py-20">
             <div className="flex flex-col-reverse md:flex-row items-center gap-12">
@@ -49,7 +47,6 @@ function WelCome() {
                 </p>
               </div>
 
-              {/* Right Side: Image (ඔබේ Illustration එක) */}
               <div className="w-full md:w-1/2 flex justify-center">
                 <img
                   src={heroImage}
@@ -61,7 +58,6 @@ function WelCome() {
           </div>
         </header>
 
-        {/* 3. Features Section (ඔබේ Project එකේ විශේෂාංග) */}
         <section className="bg-gray-50 py-20">
           <div className="max-w-7xl mx-auto px-6 sm:px-8">
             <div className="text-center mb-16">

@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
 import signupImage from "../../assets/signup.png"; 
 import { resetPassword } from "../../services/auth";
+import toast from "react-hot-toast";
 
 function ResetPassword() {
   const { token } = useParams(); 
@@ -15,20 +16,20 @@ function ResetPassword() {
     e.preventDefault();
 
     if (password === "" || confirmPassword === "") {
-      alert("Please fill in all fields.");
+      toast.error("Please enter a password.");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
 
     setLoading(true);
 
     try {
-      console.log("Token:", token);
-      console.log("New Password:", password);
+      // console.log("Token:", token);
+      // console.log("New Password:", password);
 
       const res = await resetPassword({ token, password });
       console.log(res)
@@ -38,7 +39,7 @@ function ResetPassword() {
 
     } catch (error) {
       console.log(error);
-      alert("Failed to reset password. Link might be expired.");
+      toast.error("Failed to reset password. Link might be expired.");
     } finally {
       setLoading(false);
     }

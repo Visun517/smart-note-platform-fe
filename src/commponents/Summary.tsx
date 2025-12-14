@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { Sparkles, RefreshCw, AlertCircle, Copy, Check } from "lucide-react";
 import { getSummary } from "../services/ai";
+import toast from "react-hot-toast";
 interface SummaryViewProps {
   noteId: string | undefined;
   summaryProps: any;  
@@ -29,8 +30,7 @@ function Summary({ noteId , summaryProps}: SummaryViewProps ) {
       setSummary(res.data.summary); 
 
     } catch (err) {
-      console.error(err);
-      setError("Failed to generate summary. Please try again.");
+      toast.error("Failed to generate summary. Please try again.");
     } finally {
       setLoading(false);
     }

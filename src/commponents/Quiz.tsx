@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { saveQuizAttempt } from "../services/quizeattempt"; // Services Import
 import { getQuiz } from "../services/ai";
+import toast from "react-hot-toast";
 
 interface SummaryViewProps {
   noteId: string | undefined;
@@ -57,8 +58,7 @@ if (quizProps && quizProps.questions) {
       setQuizFinished(false);
       resetQuestionState();
     } catch (error) {
-      console.error("Quiz Gen Error:", error);
-      alert("Failed to generate quiz.");
+      toast.error("Failed to generate quiz.");
     } finally {
       setLoading(false);
     }
@@ -84,7 +84,7 @@ if (quizProps && quizProps.questions) {
         quizIndex: currentQuestionIndex,
       });
     } catch (error) {
-      console.error("Failed to save attempt", error);
+      toast.error('Failed to save attempt.');
     }
   };
 

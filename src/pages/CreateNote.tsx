@@ -4,6 +4,7 @@ import { Save, Edit2 } from "lucide-react";
 import SubjectSelector from "../commponents/createSubject";
 import NotePad from "../commponents/NotePad";
 import { createNnote, updateNoteById, getNoteById } from "../services/note";
+import toast from "react-hot-toast";
 
 function CreateNote() {
   const { id } = useParams(); 
@@ -54,19 +55,15 @@ function CreateNote() {
 
     try {
       if (isEditMode && id) {
-        const res =  await updateNoteById(id, noteData);
-        console.log(res)
-        alert("Note Updated Successfully! ✅");
+        await updateNoteById(id, noteData);
         navigate(`/app/notes/${id}`);
       } else {
-        const res =await createNnote(noteData);
-        console.log(res)
-        alert("Note Created Successfully! 🎉");
+        await createNnote(noteData);
         navigate("/app/notes");
       }
     } catch (error) {
       console.error(error);
-      alert("Failed to save note.");
+      toast.error("Failed to save note.");
     } finally {
       setLoading(false);
     }

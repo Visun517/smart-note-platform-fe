@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Layers, RefreshCw, AlertCircle, RotateCw } from "lucide-react";
 import { getFlasCards } from "../services/ai"; // Service import
+import toast from "react-hot-toast";
 
 interface FlashCardsViewProps {
   noteId: string | undefined;
@@ -24,14 +25,14 @@ function FlashCards({ noteId, flashcardProps }: FlashCardsViewProps) {
   const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-if (flashcardProps) {
+    if (flashcardProps) {
       if (Array.isArray(flashcardProps)) {
         setCards(flashcardProps);
-      } 
-      else if (typeof flashcardProps === 'object') {
-        setCards([flashcardProps]); 
+      } else if (typeof flashcardProps === "object") {
+        setCards([flashcardProps]);
       }
-    }  }, [flashcardProps]);
+    }
+  }, [flashcardProps]);
 
   // Generate Function
   const handleGenerate = async () => {
@@ -45,8 +46,7 @@ if (flashcardProps) {
       const res = await getFlasCards(noteId);
       setCards(res.data.flashcards);
     } catch (err) {
-      console.error(err);
-      setError("Failed to generate flashcards. Please try again.");
+      toast.error("Failed to generate flashcards. Please try again.");
     } finally {
       setLoading(false);
     }

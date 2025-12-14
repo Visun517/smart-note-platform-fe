@@ -8,6 +8,7 @@ import {
   Lightbulb,
 } from "lucide-react";
 import { getExplanation } from "../services/ai";
+import toast from "react-hot-toast";
 interface ExplanationViewProps {
   noteId: string | undefined;
   explanationProps: any;
@@ -32,11 +33,9 @@ function Explanation({ noteId, explanationProps }: ExplanationViewProps) {
 
     try {
       const res = await getExplanation(noteId);
-      console.log(res);
       setExplanation(res.data.explanation);
     } catch (err) {
-      console.error(err);
-      setError("Failed to generate explanation. Please try again.");
+      toast.error("Failed to generate explanation. Please try again.");
     } finally {
       setLoading(false);
     }

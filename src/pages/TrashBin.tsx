@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Clock
 } from "lucide-react";
+import toast from "react-hot-toast";
 
 const TrashBin = () => {
   const [notes, setNotes] = useState<any[]>([]);
@@ -25,7 +26,7 @@ const TrashBin = () => {
       setTotalPages(res.data.pagination.totalPages);
       setCurrentPage(res.data.pagination.currentPage);
     } catch (error) {
-      console.error("Error fetching trash:", error);
+      toast.error("Failed to fetch trash");
     } finally {
       setLoading(false);
     }
@@ -44,7 +45,7 @@ const TrashBin = () => {
         setCurrentPage(currentPage - 1);
       }
     } catch (error) {
-      alert("Failed to restore note");
+      toast.error("Failed to restore note");
     }
   };
 
@@ -58,7 +59,7 @@ const TrashBin = () => {
             setCurrentPage(currentPage - 1);
         }
       } catch (error) {
-        alert("Failed to delete note");
+        toast.error("Failed to delete note");
       }
     }
   };

@@ -12,6 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { getAllNotes, deleteNoteId, searchNotes } from "../services/note";
+import toast from "react-hot-toast";
 
 const NoteList = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const NoteList = () => {
 
   useEffect(() => {
     fetchData();
-  }, [page, searchQuery]); 
+  }, [page, searchQuery]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -36,7 +37,7 @@ const NoteList = () => {
         console.log("Searching:", searchQuery);
         res = await searchNotes(searchQuery);
         setNotes(res.data.notes);
-        setTotalPages(1); 
+        setTotalPages(1);
       } else {
         // B. Normal Fetch
         res = await getAllNotes(page, LIMIT);
@@ -44,7 +45,7 @@ const NoteList = () => {
         setTotalPages(res.data.totalPages);
       }
     } catch (error) {
-      console.error("Failed to fetch notes", error);
+      toast.error("Failed to fetch notes");
       setNotes([]);
     } finally {
       setLoading(false);
@@ -61,7 +62,7 @@ const NoteList = () => {
         await deleteNoteId(id);
         fetchData();
       } catch (error) {
-        alert("Failed to delete note.");
+        toast.error("Failed to delete note");
       }
     }
   };

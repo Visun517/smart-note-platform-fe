@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { useAuth } from "../Context/authContext";
 import { getDashboardOverview } from "../services/dashboard";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -37,7 +38,7 @@ const Dashboard = () => {
         setLoading(false);
         setError(false);
       } catch (err) {
-        console.error(err);
+        toast.error("Something went wrong. Please try again.");
         setError(true);
         setLoading(false);
       }

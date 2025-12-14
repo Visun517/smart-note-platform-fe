@@ -44,6 +44,7 @@ import {
 } from "lucide-react";
 import { uploadImage, uploadPdf } from "../services/cloudinary";
 import { convertPdfToImages } from "../utils/pdfUtils";
+import toast from "react-hot-toast";
 
 // Props Interface
 interface NotePadProps {
@@ -156,8 +157,7 @@ const MenuBar = ({ editor, onOpenDrawing }: { editor: any; onOpenDrawing: () => 
         const res = await uploadImage(formdata);
         editor.chain().focus().setImage({ src: res.data.imageUrl }).run();
       } catch (error) {
-        console.log(error);
-        alert("Image upload failed");
+        toast.error("Image upload failed");
       }
     }
   };
@@ -185,8 +185,7 @@ const MenuBar = ({ editor, onOpenDrawing }: { editor: any; onOpenDrawing: () => 
           .insertContent(` 📄 ${file.name} `)
           .run();
       } catch (error) {
-        console.log(error);
-        alert("PDF upload failed");
+        toast.error("PDF upload failed");
       }
     }
   };

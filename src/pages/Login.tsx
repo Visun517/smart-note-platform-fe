@@ -5,6 +5,7 @@ import { useAuth } from "../Context/authContext";
 import signupImage from "../assets/signup.png";
 import { GoogleLogin } from "@react-oauth/google";
 import { googleAuth } from "../services/auth";
+import toast from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Login() {
     e.preventDefault();
 
     if (email === "" || password === "") {
-      alert("Please enter both email and password.");
+      toast.error("Please enter both email and password.");
       return;
     }
 
@@ -29,7 +30,6 @@ function Login() {
       const res: any = await logIn(user);
 
       const accessToken = res.data.data.accessToken;
-      console.log(accessToken);
 
       localStorage.setItem("accessToken", accessToken);
 
@@ -38,8 +38,7 @@ function Login() {
 
       navigate("/app/dashboard");
     } catch (error) {
-      console.log(error);
-      alert("Login failed. Please check your credentials.");
+      toast.error("Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }
