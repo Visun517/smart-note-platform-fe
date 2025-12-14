@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+# 🎓 SmartNotes - AI-Powered Study Companion (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Project Banner](public/logo.png)
 
-Currently, two official plugins are available:
+**SmartNotes** is a modern, full-stack web application designed to revolutionize the way students learn. It combines a powerful rich-text editor with **Google Gemini AI** to automatically generate study materials like summaries, quizzes, and flashcards directly from your lecture notes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🌟 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔐 Authentication & User Management
+* **Secure Login/Signup:** Robust Email & Password authentication using JWT.
+* **Google OAuth:** Seamless one-click sign-in using Google accounts.
+* **Profile Management:** Update user details and profile picture with **Cloudinary** integration.
 
-## Expanding the ESLint configuration
+### 📝 Advanced Note Editor (Tiptap)
+* **Rich Text Formatting:** Support for **Bold**, *Italic*, Headings, Lists, Code Blocks, and Quotes.
+* **Table Support:** Insert and manage tables dynamically within notes.
+* **Multimedia Integration:**
+    * Upload and embed Images effortlessly.
+    * **PDF Handling:** Convert PDF pages into images and embed them directly into notes for easy annotation.
+* **Drawing Tool:** Built-in sketching canvas (`react-sketch-canvas`) to draw diagrams and insert them as images.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🤖 AI Workspace (Powered by Gemini 1.5 Flash)
+* **Instant Summaries:** Generate concise summaries of long lecture notes in seconds.
+* **Deep Explanations:** Get detailed AI-driven breakdowns for complex topics.
+* **Interactive Quizzes:** Auto-generate MCQs based on your notes, take quizzes, and get instant scoring/feedback.
+* **Flashcards:** AI-generated flashcards with an interactive 3D flip animation for active recall study.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 📂 Organization & Productivity
+* **Dashboard:** Visual analytics of your study progress (Total notes, Quiz stats) using **Recharts**.
+* **Subject Folders:** Organize notes into specific subject folders for better structure.
+* **Global Search:** Real-time search functionality to find notes instantly.
+* **Trash Bin:** Soft delete notes with options to **Restore** or **Delete Forever**.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🎨 UI/UX
+* **Responsive Design:** Fully responsive layout optimized for both Desktop and Mobile devices.
+* **Theme Support:** Toggle between **Light** and **Dark** modes based on preference.
+* **Modern Components:** Built with **Tailwind CSS** and **Lucide React** icons for a clean, modern look.
+* **Notifications:** Beautiful toast notifications using `react-hot-toast`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Category | Technology |
+|----------|------------|
+| **Framework** | [React](https://react.dev/) + [Vite](https://vitejs.dev/) |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) |
+| **Icons** | [Lucide React](https://lucide.dev/) |
+| **Editor** | [Tiptap](https://tiptap.dev/) |
+| **Drawing** | [React Sketch Canvas](https://github.com/vinothpandian/react-sketch-canvas) |
+| **Charts** | [Recharts](https://recharts.org/) |
+| **Routing** | [React Router DOM](https://reactrouter.com/) |
+| **API Client** | [Axios](https://axios-http.com/) |
+| **Auth** | [React OAuth/Google](https://github.com/MomenSherif/react-oauth) |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to set up the project locally.
+
+### Prerequisites
+* Node.js (v16 or higher)
+* npm or yarn
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/your-username/smart-note-platform.git](https://github.com/your-username/smart-note-platform.git)
+cd smart-note-platform/front-end
