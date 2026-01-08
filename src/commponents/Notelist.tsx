@@ -81,14 +81,14 @@ const NoteList = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 pb-10">
+    <div className="max-w-6xl pb-10 mx-auto space-y-8">
       {/* Header Section */}
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+          <h1 className="flex items-center gap-2 text-3xl font-bold text-gray-800">
             {searchQuery ? `Search Results: "${searchQuery}"` : "My Notes 📚"}
           </h1>
-          <p className="text-gray-500 mt-1">
+          <p className="mt-1 text-gray-500">
             {searchQuery
               ? `Found ${notes.length} notes`
               : "Manage and organize your study materials."}
@@ -99,7 +99,7 @@ const NoteList = () => {
         {searchQuery ? (
           <button
             onClick={() => navigate("/app/notes")}
-            className="text-red-500 font-semibold hover:underline"
+            className="px-8 py-3 font-bold text-white transition transform bg-red-600 rounded-full shadow-lg hover:bg-red-700 hover:shadow-blue-200 active:scale-95"
           >
             Clear Search
           </button>
@@ -116,47 +116,47 @@ const NoteList = () => {
       {/* --- CONTENT AREA --- */}
       {loading ? (
         // Loading Spinner
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="flex items-center justify-center h-64">
+          <div className="w-12 h-12 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin"></div>
         </div>
       ) : notes.length === 0 ? (
         // Empty State
-        <div className="text-center py-20 bg-white rounded-2xl border border-gray-100 shadow-sm">
-          <div className="bg-blue-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="py-20 text-center bg-white border border-gray-100 shadow-sm rounded-2xl">
+          <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 rounded-full bg-blue-50">
             <FileText size={32} className="text-blue-500" />
           </div>
           <h3 className="text-xl font-bold text-gray-700">No notes found</h3>
-          <p className="text-gray-500 mt-2 mb-6">
+          <p className="mt-2 mb-6 text-gray-500">
             Start by creating your first note to see it here.
           </p>
           <Link
             to="/app/create-note"
-            className="text-blue-600 font-semibold hover:underline"
+            className="font-semibold text-blue-600 hover:underline"
           >
             Create Note &rarr;
           </Link>
         </div>
       ) : (
         // Notes Grid
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {notes.map((note) => (
             <div
               key={note._id}
-              className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col justify-between"
+              className="flex flex-col justify-between p-5 transition-all duration-300 bg-white border border-gray-100 shadow-sm rounded-2xl hover:shadow-md group"
             >
               <div>
                 {/* Note Header */}
-                <div className="flex justify-between items-start mb-3">
-                  <div className="p-2 bg-blue-50 rounded-lg text-blue-600">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="p-2 text-blue-600 rounded-lg bg-blue-50">
                     <FileText size={20} />
                   </div>
                 </div>
 
                 {/* Title & Date */}
-                <h3 className="text-lg font-bold text-gray-800 mb-1 line-clamp-1 group-hover:text-blue-600 transition-colors">
+                <h3 className="mb-1 text-lg font-bold text-gray-800 transition-colors line-clamp-1 group-hover:text-blue-600">
                   {note.title}
                 </h3>
-                <div className="flex items-center gap-2 text-xs text-gray-400 mb-4">
+                <div className="flex items-center gap-2 mb-4 text-xs text-gray-400">
                   <Calendar size={12} />
                   <span>{formatDate(note.createdAt)}</span>
                 </div>
@@ -175,7 +175,7 @@ const NoteList = () => {
                 {/* View Button */}
                 <button
                   onClick={() => navigate(`/app/notes/${note._id}`)}
-                  className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-blue-600 transition"
+                  className="flex items-center gap-1 text-sm font-medium text-gray-600 transition hover:text-blue-600"
                 >
                   <Eye size={16} /> View
                 </button>
@@ -184,7 +184,7 @@ const NoteList = () => {
                   {/* Edit Button */}
                   <button
                     onClick={() => navigate(`/app/notes/${note._id}/edit`)}
-                    className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition"
+                    className="p-2 text-gray-400 transition rounded-lg hover:bg-blue-50 hover:text-blue-600"
                     title="Edit Note"
                   >
                     <Edit size={16} />
@@ -193,7 +193,7 @@ const NoteList = () => {
                   {/* Delete Button */}
                   <button
                     onClick={(e) => handleDelete(note._id, e)}
-                    className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-500 transition"
+                    className="p-2 text-gray-400 transition rounded-lg hover:bg-red-50 hover:text-red-500"
                     title="Delete Note"
                   >
                     <Trash2 size={16} />
@@ -207,11 +207,11 @@ const NoteList = () => {
 
       {/* --- PAGINATION CONTROLS --- */}
       {notes.length > 0 && (
-        <div className="flex justify-center items-center gap-4 mt-10">
+        <div className="flex items-center justify-center gap-4 mt-10">
           <button
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}
-            className="flex items-center gap-1 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-600 transition bg-white border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronLeft size={16} /> Previous
           </button>
@@ -223,7 +223,7 @@ const NoteList = () => {
           <button
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={page === totalPages}
-            className="flex items-center gap-1 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-600 transition bg-white border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Next <ChevronRight size={16} />
           </button>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   BarChart,
@@ -61,7 +61,7 @@ const Dashboard = () => {
         <p className="text-xl font-semibold">Oops! Something went wrong.</p>
         <button
           onClick={() => window.location.reload()}
-          className="mt-4 px-4 py-2 bg-red-100 rounded-lg hover:bg-red-200 transition"
+          className="px-4 py-2 mt-4 transition bg-red-100 rounded-lg hover:bg-red-200"
         >
           Try Again
         </button>
@@ -73,19 +73,19 @@ const Dashboard = () => {
   if (data?.totals?.notes === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[80vh] text-center px-4 ">
-        <div className="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center text-4xl mb-6">
+        <div className="flex items-center justify-center w-24 h-24 mb-6 text-4xl rounded-full bg-blue-50">
           📝
         </div>
         <h2 className="text-3xl font-bold text-gray-800">
           Welcome, {user?.username || "Friend"}! 👋
         </h2>
-        <p className="text-gray-500 mt-2 mb-8 max-w-md">
+        <p className="max-w-md mt-2 mb-8 text-gray-500">
           Your dashboard is looking a bit empty. Create your first smart note to
           get AI summaries and quizzes!
         </p>
         <Link
           to="/app/notes/new"
-          className="bg-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 hover:shadow-blue-200 transition transform active:scale-95"
+          className="px-8 py-3 font-bold text-white transition transform bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 hover:shadow-blue-200 active:scale-95"
         >
           Create First Note 🚀
         </Link>
@@ -95,14 +95,14 @@ const Dashboard = () => {
 
   // --- 4. Main Dashboard UI ---
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 animate-fade-in bg-gray-200 ">
+    <div className="p-6 mx-auto space-y-8 bg-gray-200 md:p-8 max-w-7xl animate-fade-in ">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+      <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
         <div>
           <h1 className="text-3xl font-bold text-gray-800">
             {getGreeting()}, {user?.username}! 👋
           </h1>
-          <p className="text-gray-500 mt-1">
+          <p className="mt-1 text-gray-500">
             Here is your daily learning overview.
           </p>
         </div>
@@ -115,7 +115,7 @@ const Dashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 ">
         <StatsCard
           title="Total Notes"
           count={data.totals.notes}
@@ -146,13 +146,13 @@ const Dashboard = () => {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 ">
         {/* Chart 1: Notes Creation Trend */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <h3 className="text-lg font-bold text-gray-800 mb-6">
+        <div className="p-6 bg-white border border-gray-100 shadow-sm rounded-2xl">
+          <h3 className="mb-6 text-lg font-bold text-gray-800">
             Notes Created (Last 7 Days)
           </h3>
-          <div className="h-64 w-full">
+          <div className="w-full h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.graphs.notesCreation}>
                 <CartesianGrid
@@ -186,11 +186,11 @@ const Dashboard = () => {
         </div>
 
         {/* Chart 2: Quiz Performance Trend */} 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 ">
-          <h3 className="text-lg font-bold text-gray-800 mb-6">
+        <div className="p-6 bg-white border border-gray-100 shadow-sm rounded-2xl ">
+          <h3 className="mb-6 text-lg font-bold text-gray-800">
             Quiz Activity & Avg Score
           </h3>
-          <div className="h-64 w-full">
+          <div className="w-full h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data.graphs.quizActivity}>
                 <defs>
@@ -233,12 +233,12 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Notes List */}
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <div className="flex justify-between items-center mb-6">
+      <div className="p-6 bg-white border border-gray-100 shadow-sm rounded-2xl">
+        <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-bold text-gray-800">Recent Notes</h3>
           <Link
             to="/app/notes"
-            className="text-sm text-blue-600 hover:text-blue-700 font-semibold"
+            className="text-sm font-semibold text-blue-600 hover:text-blue-700"
           >
             View All
           </Link>
@@ -247,7 +247,7 @@ const Dashboard = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="text-gray-400 text-xs uppercase tracking-wider border-b border-gray-50">
+              <tr className="text-xs tracking-wider text-gray-400 uppercase border-b border-gray-50">
                 <th className="pb-3 pl-2 font-medium">Note Title</th>
                 <th className="pb-3 font-medium">Created Date</th>
                 <th className="pb-3 font-medium">Tags</th>
@@ -258,9 +258,9 @@ const Dashboard = () => {
               {data.recentNotes.map((note: any) => (
                 <tr
                   key={note._id}
-                  className="group hover:bg-gray-50 transition border-b border-gray-50 last:border-0"
+                  className="transition border-b group hover:bg-gray-50 border-gray-50 last:border-0"
                 >
-                  <td className="py-4 pl-2 font-semibold text-gray-700 group-hover:text-blue-600 transition">
+                  <td className="py-4 pl-2 font-semibold text-gray-700 transition group-hover:text-blue-600">
                     {note.title}
                   </td>
                   <td className="py-4 text-gray-500">
@@ -271,7 +271,7 @@ const Dashboard = () => {
                       {note.tags?.slice(0, 2).map((tag: string) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 bg-gray-100 text-gray-500 rounded-md text-xs"
+                          className="px-2 py-1 text-xs text-gray-500 bg-gray-100 rounded-md"
                         >
                           {tag}
                         </span>
@@ -292,7 +292,7 @@ const Dashboard = () => {
           </table>
 
           {data.recentNotes.length === 0 && (
-            <p className="text-center text-gray-400 py-4">
+            <p className="py-4 text-center text-gray-400">
               No recent notes found.
             </p>
           )}

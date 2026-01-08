@@ -28,13 +28,14 @@ const AiWorkspace = () => {
   const fetchNoteById = async (id: string | undefined) => {
     const note = await getNoteById(id);
     setNoteData(note.data.note);
+    console.log(noteData)
   };
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
       {/* --- 1. Tab Navigation Bar --- */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <h1 className="text-xl font-bold text-gray-800 mb-4">
+      <div className="px-6 py-4 bg-white border-b border-gray-200">
+        <h1 className="mb-4 text-xl font-bold text-gray-800">
           AI Study Workspace 🤖
         </h1>
 

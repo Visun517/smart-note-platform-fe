@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Sparkles, RefreshCw, AlertCircle, Copy, Check } from "lucide-react";
 import { getSummary } from "../services/ai";
 import toast from "react-hot-toast";
@@ -47,9 +47,9 @@ function Summary({ noteId , summaryProps}: SummaryViewProps ) {
     <div className="max-w-4xl mx-auto space-y-6">
       
       {/* Header Section */}
-      <div className="flex justify-between items-center bg-purple-50 p-4 rounded-xl border border-purple-100">
+      <div className="flex items-center justify-between p-4 border border-purple-100 bg-purple-50 rounded-xl">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-white rounded-lg shadow-sm text-purple-600">
+          <div className="p-2 text-purple-600 bg-white rounded-lg shadow-sm">
             <Sparkles size={24} />
           </div>
           <div>
@@ -80,7 +80,7 @@ function Summary({ noteId , summaryProps}: SummaryViewProps ) {
       
       {/* 1. Error State */}
       {error && (
-        <div className="flex items-center gap-2 p-4 text-red-700 bg-red-50 border border-red-200 rounded-xl">
+        <div className="flex items-center gap-2 p-4 text-red-700 border border-red-200 bg-red-50 rounded-xl">
           <AlertCircle size={20} />
           <span>{error}</span>
         </div>
@@ -88,13 +88,13 @@ function Summary({ noteId , summaryProps}: SummaryViewProps ) {
 
       {/* 2. Success State (Summary Display) */}
       {summary && (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="p-6 duration-500 bg-white border border-gray-200 shadow-sm rounded-2xl animate-in fade-in slide-in-from-bottom-4">
           
-          <div className="flex justify-between items-start mb-4">
+          <div className="flex items-start justify-between mb-4">
             <h3 className="font-bold text-gray-700">Key Points:</h3>
             <button 
                 onClick={handleCopy}
-                className="text-gray-400 hover:text-gray-600 transition"
+                className="text-gray-400 transition hover:text-gray-600"
                 title="Copy to clipboard"
             >
                 {copied ? <Check size={18} className="text-green-500"/> : <Copy size={18}/>}
@@ -102,7 +102,7 @@ function Summary({ noteId , summaryProps}: SummaryViewProps ) {
           </div>
 
           {/* Summary Text */}
-          <div className="prose prose-purple max-w-none text-gray-600 leading-relaxed whitespace-pre-line">
+          <div className="leading-relaxed prose text-gray-600 whitespace-pre-line prose-purple max-w-none">
             {summary}
           </div>
 
@@ -111,7 +111,7 @@ function Summary({ noteId , summaryProps}: SummaryViewProps ) {
 
       {/* 3. Empty State (Initial) */}
       {!summary && !loading && !error && (
-        <div className="flex flex-col items-center justify-center h-64 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400 bg-gray-50/50">
+        <div className="flex flex-col items-center justify-center h-64 text-gray-400 border-2 border-gray-200 border-dashed rounded-2xl bg-gray-50/50">
           <Sparkles size={48} className="mb-3 opacity-20" />
           <p>Click "Generate Summary" to start</p>
         </div>

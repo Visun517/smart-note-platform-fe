@@ -5,7 +5,7 @@ import { getUserDetails, profileUpload, updateUserDetails } from "../services/Pr
 import toast from "react-hot-toast";
 
 function Profile() {
-  const { user, setUser } = useAuth(); // Auth Context
+  const { setUser } = useAuth(); // Auth Context
 
   // States
   const [loading, setLoading] = useState(false);
@@ -83,32 +83,32 @@ function Profile() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto pb-10">
+    <div className="max-w-5xl pb-10 mx-auto">
       
       {/* Page Title */}
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">Account Settings</h1>
+      <h1 className="mb-8 text-3xl font-bold text-gray-800">Account Settings</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         
         {/* --- LEFT COLUMN: Image --- */}
         <div className="space-y-6">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center">
+          <div className="flex flex-col items-center p-6 bg-white border border-gray-100 shadow-sm rounded-2xl">
             
             {/* Image Container */}
             <div className="relative group">
-              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100">
+              <div className="w-32 h-32 overflow-hidden bg-gray-100 border-4 border-white rounded-full shadow-lg">
                 {previewImage ? (
-                  <img src={previewImage} alt="Profile" className="w-full h-full object-cover" />
+                  <img src={previewImage} alt="Profile" className="object-cover w-full h-full" />
                 ) : (
-                  <div className="w-full h-full bg-blue-100 flex items-center justify-center text-4xl font-bold text-blue-600">
+                  <div className="flex items-center justify-center w-full h-full text-4xl font-bold text-blue-600 bg-blue-100">
                     {formData.username ? formData.username.charAt(0).toUpperCase() : "U"}
                   </div>
                 )}
 
                 {/* Loading Overlay */}
                 {imageLoading && (
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                    <Loader2 className="animate-spin text-white" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                    <Loader2 className="text-white animate-spin" />
                   </div>
                 )}
               </div>
@@ -131,27 +131,27 @@ function Profile() {
             </div>
 
             <h2 className="mt-4 text-xl font-bold text-gray-800">{formData.username}</h2>
-            <p className="text-gray-500 text-sm">{formData.email}</p>
+            <p className="text-sm text-gray-500">{formData.email}</p>
           </div>
         </div>
 
         {/* --- RIGHT COLUMN: Form --- */}
         <div className="md:col-span-2">
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-            <h3 className="text-xl font-bold text-gray-800 mb-6">Edit Details</h3>
+          <div className="p-8 bg-white border border-gray-100 shadow-sm rounded-2xl">
+            <h3 className="mb-6 text-xl font-bold text-gray-800">Edit Details</h3>
 
             <form onSubmit={handleUpdateProfile} className="space-y-6">
               
               {/* Username Input */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Full Name</label>
                 <div className="relative">
                   <User className="absolute left-4 top-3.5 text-gray-400" size={20} />
                   <input
                     type="text"
                     value={formData.username}
                     onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition placeholder-gray-400"
+                    className="w-full py-3 pl-12 pr-4 text-gray-800 placeholder-gray-400 transition border border-gray-200 outline-none rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-100 focus:border-blue-500"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -159,14 +159,14 @@ function Profile() {
 
               {/* Email Input */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <label className="block mb-2 text-sm font-medium text-gray-700">Email Address</label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-3.5 text-gray-400" size={20} />
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition placeholder-gray-400"
+                    className="w-full py-3 pl-12 pr-4 text-gray-800 placeholder-gray-400 transition border border-gray-200 outline-none rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-100 focus:border-blue-500"
                     placeholder="name@example.com"
                   />
                 </div>
@@ -174,8 +174,8 @@ function Profile() {
 
               {/* Password Input */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  New Password <span className="text-xs text-gray-400 font-normal">(Required to save changes)</span>
+                <label className="block mb-2 text-sm font-medium text-gray-700">
+                  New Password <span className="text-xs font-normal text-gray-400">(Required to save changes)</span>
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-4 top-3.5 text-gray-400" size={20} />
@@ -183,7 +183,7 @@ function Profile() {
                     type="password"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition placeholder-gray-400"
+                    className="w-full py-3 pl-12 pr-4 text-gray-800 placeholder-gray-400 transition border border-gray-200 outline-none rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-100 focus:border-blue-500"
                     placeholder="Enter new password to update"
                   />
                 </div>
@@ -194,7 +194,7 @@ function Profile() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center w-full gap-2 px-8 py-3 font-bold text-white transition bg-blue-600 shadow-lg sm:w-auto rounded-xl hover:bg-blue-700 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {loading ? <Loader2 className="animate-spin" /> : <Save size={18} />}
                   Save Changes

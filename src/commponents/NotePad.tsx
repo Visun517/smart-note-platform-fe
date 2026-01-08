@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useEffect } from "react"; // useEffect එකතු කළා
+import { useCallback, useRef, useState, useEffect } from "react"; 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -62,7 +62,7 @@ interface DrawingModalProps {
 const DrawingModal = ({ isOpen, onClose, onInsert }: DrawingModalProps) => {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
   const [strokeColor, setStrokeColor] = useState("black");
-  const [strokeWidth, setStrokeWidth] = useState(4);
+  const [strokeWidth] = useState(4);
 
   if (!isOpen) return null;
 
@@ -76,12 +76,12 @@ const DrawingModal = ({ isOpen, onClose, onInsert }: DrawingModalProps) => {
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
-        <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-          <h3 className="font-bold text-gray-700 flex items-center gap-2">
+      <div className="flex flex-col w-full max-w-3xl overflow-hidden duration-200 bg-white shadow-2xl rounded-2xl animate-in fade-in zoom-in">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gray-50">
+          <h3 className="flex items-center gap-2 font-bold text-gray-700">
             <PenTool size={20} className="text-blue-600" /> Draw Something
           </h3>
-          <button onClick={onClose} className="text-gray-400 hover:text-red-500 transition">
+          <button onClick={onClose} className="text-gray-400 transition hover:text-red-500">
             <X size={24} />
           </button>
         </div>
@@ -96,7 +96,7 @@ const DrawingModal = ({ isOpen, onClose, onInsert }: DrawingModalProps) => {
           />
         </div>
 
-        <div className="p-4 border-t border-gray-100 bg-gray-50 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 border-t border-gray-100 bg-gray-50">
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
               {["black", "red", "blue", "green", "#eab308"].map((color) => (
@@ -119,15 +119,15 @@ const DrawingModal = ({ isOpen, onClose, onInsert }: DrawingModalProps) => {
             <button onClick={() => canvasRef.current?.eraseMode(false)} className="text-gray-600 hover:text-blue-600 font-bold text-sm border border-gray-300 px-2 py-0.5 rounded">
               Pen
             </button>
-            <button onClick={() => canvasRef.current?.clearCanvas()} className="text-red-500 hover:bg-red-50 p-1 rounded" title="Clear All">
+            <button onClick={() => canvasRef.current?.clearCanvas()} className="p-1 text-red-500 rounded hover:bg-red-50" title="Clear All">
               <Trash2 size={20} />
             </button>
           </div>
           <div className="flex gap-3">
-            <button onClick={() => canvasRef.current?.undo()} className="text-gray-500 hover:text-gray-800 text-sm font-medium">
+            <button onClick={() => canvasRef.current?.undo()} className="text-sm font-medium text-gray-500 hover:text-gray-800">
               Undo
             </button>
-            <button onClick={handleInsert} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 font-medium transition shadow-lg shadow-blue-200">
+            <button onClick={handleInsert} className="flex items-center gap-2 px-5 py-2 font-medium text-white transition bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 shadow-blue-200">
               <Check size={18} /> Insert Drawing
             </button>
           </div>
@@ -206,7 +206,7 @@ const MenuBar = ({ editor, onOpenDrawing }: { editor: any; onOpenDrawing: () => 
   };
 
   return (
-    <div className="border-b border-gray-200 bg-gray-50/50 p-2 flex flex-wrap gap-1 sticky top-0 z-20 backdrop-blur-sm rounded-t-xl items-center">
+    <div className="sticky top-0 z-20 flex flex-wrap items-center gap-1 p-2 border-b border-gray-200 bg-gray-50/50 backdrop-blur-sm rounded-t-xl">
       <input type="file" accept="image/*" ref={imageInputRef} className="hidden" onChange={addImage} />
       <input type="file" accept=".pdf" ref={pdfInputRef} className="hidden" onChange={addPdf} />
 
@@ -215,36 +215,36 @@ const MenuBar = ({ editor, onOpenDrawing }: { editor: any; onOpenDrawing: () => 
       <button onClick={() => editor.chain().focus().toggleUnderline().run()} className={btnClass(editor.isActive("underline"))}><UnderlineIcon size={18} /></button>
       <button onClick={() => editor.chain().focus().toggleStrike().run()} className={btnClass(editor.isActive("strike"))}><Strikethrough size={18} /></button>
 
-      <div className="w-px h-6 bg-gray-300 mx-1 self-center"></div>
+      <div className="self-center w-px h-6 mx-1 bg-gray-300"></div>
 
       <button onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={btnClass(editor.isActive("heading", { level: 1 }))}><Heading1 size={18} /></button>
       <button onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={btnClass(editor.isActive("heading", { level: 2 }))}><Heading2 size={18} /></button>
       <button onClick={() => editor.chain().focus().toggleBulletList().run()} className={btnClass(editor.isActive("bulletList"))}><List size={18} /></button>
       <button onClick={() => editor.chain().focus().toggleOrderedList().run()} className={btnClass(editor.isActive("orderedList"))}><ListOrdered size={18} /></button>
 
-      <div className="w-px h-6 bg-gray-300 mx-1 self-center"></div>
+      <div className="self-center w-px h-6 mx-1 bg-gray-300"></div>
 
       <button onClick={() => editor.chain().focus().setTextAlign("left").run()} className={btnClass(editor.isActive({ textAlign: "left" }))}><AlignLeft size={18} /></button>
       <button onClick={() => editor.chain().focus().setTextAlign("center").run()} className={btnClass(editor.isActive({ textAlign: "center" }))}><AlignCenter size={18} /></button>
       <button onClick={() => editor.chain().focus().setTextAlign("right").run()} className={btnClass(editor.isActive({ textAlign: "right" }))}><AlignRight size={18} /></button>
 
-      <div className="w-px h-6 bg-gray-300 mx-1 self-center"></div>
+      <div className="self-center w-px h-6 mx-1 bg-gray-300"></div>
 
       <button onClick={insertTable} className={btnClass(editor.isActive('table'))} title="Insert Table"><TableIcon size={18} /></button>
 
       {editor.isActive('table') && (
-        <div className="flex gap-1 bg-white border border-gray-200 rounded-lg px-2 ml-2 animate-in fade-in">
+        <div className="flex gap-1 px-2 ml-2 bg-white border border-gray-200 rounded-lg animate-in fade-in">
            <button onClick={() => editor.chain().focus().addColumnAfter().run()} className="p-1 hover:text-blue-600"><PlusSquare size={16} className="rotate-90"/></button>
            <button onClick={() => editor.chain().focus().deleteColumn().run()} className="p-1 hover:text-red-500"><MinusSquare size={16} className="rotate-90"/></button>
-           <div className="w-px h-4 bg-gray-300 self-center"></div>
+           <div className="self-center w-px h-4 bg-gray-300"></div>
            <button onClick={() => editor.chain().focus().addRowAfter().run()} className="p-1 hover:text-blue-600"><PlusSquare size={16} /></button>
            <button onClick={() => editor.chain().focus().deleteRow().run()} className="p-1 hover:text-red-500"><MinusSquare size={16} /></button>
-           <div className="w-px h-4 bg-gray-300 self-center"></div>
-           <button onClick={() => editor.chain().focus().deleteTable().run()} className="p-1 text-red-500 hover:bg-red-50 rounded"><Trash2 size={16} /></button>
+           <div className="self-center w-px h-4 bg-gray-300"></div>
+           <button onClick={() => editor.chain().focus().deleteTable().run()} className="p-1 text-red-500 rounded hover:bg-red-50"><Trash2 size={16} /></button>
         </div>
       )}
 
-      <div className="w-px h-6 bg-gray-300 mx-1"></div>
+      <div className="w-px h-6 mx-1 bg-gray-300"></div>
 
       <button onClick={setLink} className={btnClass(editor.isActive("link"))}><LinkIcon size={18} /></button>
       <button onClick={onOpenDrawing} className={`${btnClass(false)} text-purple-600 hover:bg-purple-50`}><PenTool size={18} /></button>

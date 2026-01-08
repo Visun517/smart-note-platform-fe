@@ -38,18 +38,22 @@ function Quiz({ noteId, quizProps }: SummaryViewProps) {
   const [quizFinished, setQuizFinished] = useState(false);
 
   useEffect(() => {
-if (quizProps && quizProps.questions) {
-    setQuizData(quizProps);
-  }  }, [quizProps]);
-
+    if (quizProps && quizProps.questions) {
+      setQuizData({
+         ...quizProps,
+         quizId: quizProps._id || quizProps.quizId
+      });
+    }
+  }, [quizProps]);
 
   const handleGenerateQuiz = async () => {
     if (!noteId) return;
     setLoading(true);
     try {
       const res = await getQuiz(noteId);
+      console.log(res)
       setQuizData({
-        quizId: res.data.quizId,
+        quizId: res.data.quiz._id,
         questions: res.data.questions,
       });
       // Reset States
@@ -78,13 +82,14 @@ if (quizProps && quizProps.questions) {
     }
 
     try {
+      console.log(quizData.questions)
       await saveQuizAttempt(quizData.quizId, {
         userAnswer: option,
         correctAnswer: currentQuestion.correctAnswer,
         quizIndex: currentQuestionIndex,
       });
     } catch (error) {
-      toast.error('Failed to save attempt.');
+      toast.error("Failed to save attempt.");
     }
   };
 
@@ -110,7 +115,7 @@ if (quizProps && quizProps.questions) {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center h-64 text-purple-600">
-        <RefreshCw className="animate-spin mb-2" size={32} />
+        <RefreshCw className="mb-2 animate-spin" size={32} />
         <p>Generating Quiz with AI...</p>
       </div>
     );
@@ -118,14 +123,14 @@ if (quizProps && quizProps.questions) {
 
   if (!quizData) {
     return (
-      <div className="flex flex-col items-center justify-center h-64 bg-purple-50 rounded-2xl border border-purple-100 p-8 text-center">
-        <div className="bg-white p-4 rounded-full shadow-sm mb-4">
+      <div className="flex flex-col items-center justify-center h-64 p-8 text-center border border-purple-100 bg-purple-50 rounded-2xl">
+        <div className="p-4 mb-4 bg-white rounded-full shadow-sm">
           <BrainCircuit size={40} className="text-purple-600" />
         </div>
-        <h2 className="text-xl font-bold text-gray-800 mb-2">
+        <h2 className="mb-2 text-xl font-bold text-gray-800">
           Test Your Knowledge
         </h2>
-        <p className="text-gray-500 mb-6 max-w-md">
+        <p className="max-w-md mb-6 text-gray-500">
           Generate an AI-powered quiz based on your note content to reinforce
           learning.
         </p>
@@ -141,22 +146,22 @@ if (quizProps && quizProps.questions) {
 
   if (quizFinished) {
     return (
-      <div className="text-center p-10 bg-white rounded-2xl shadow-sm border border-gray-200">
-        <div className="inline-block p-4 bg-yellow-100 rounded-full mb-4">
+      <div className="p-10 text-center bg-white border border-gray-200 shadow-sm rounded-2xl">
+        <div className="inline-block p-4 mb-4 bg-yellow-100 rounded-full">
           <Trophy size={48} className="text-yellow-600" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
+        <h2 className="mb-2 text-2xl font-bold text-gray-800">
           Quiz Completed!
         </h2>
-        <p className="text-gray-600 mb-6">
+        <p className="mb-6 text-gray-600">
           You scored{" "}
-          <span className="font-bold text-purple-600 text-xl">{score}</span> out
+          <span className="text-xl font-bold text-purple-600">{score}</span> out
           of {quizData.questions.length}
         </p>
 
         <button
           onClick={handleGenerateQuiz}
-          className="flex items-center gap-2 mx-auto bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition"
+          className="flex items-center gap-2 px-6 py-2 mx-auto text-white transition bg-purple-600 rounded-full hover:bg-purple-700"
         >
           <RefreshCw size={18} /> Try Another Quiz
         </button>
@@ -169,15 +174,15 @@ if (quizProps && quizProps.questions) {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Progress Bar */}
-      <div className="flex justify-between text-sm font-medium text-gray-500 mb-2">
+      <div className="flex justify-between mb-2 text-sm font-medium text-gray-500">
         <span>
           Question {currentQuestionIndex + 1} of {quizData.questions.length}
         </span>
         <span>Score: {score}</span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-2">
+      <div className="w-full h-2 bg-gray-200 rounded-full">
         <div
-          className="bg-purple-600 h-2 rounded-full transition-all duration-300"
+          className="h-2 transition-all duration-300 bg-purple-600 rounded-full"
           style={{
             width: `${
               ((currentQuestionIndex + 1) / quizData.questions.length) * 100
@@ -187,8 +192,8 @@ if (quizProps && quizProps.questions) {
       </div>
 
       {/* Question Card */}
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-        <h3 className="text-xl font-bold text-gray-800 mb-6">
+      <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-2xl">
+        <h3 className="mb-6 text-xl font-bold text-gray-800">
           {currentQuestion.question}
         </h3>
 
@@ -235,7 +240,7 @@ if (quizProps && quizProps.questions) {
         </div>
 
         {isAnswerChecked && (
-          <div className="mt-6 flex justify-end">
+          <div className="flex justify-end mt-6">
             <button
               onClick={handleNextQuestion}
               className="flex items-center gap-2 bg-purple-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-purple-700 transition shadow-lg animate-in fade-in slide-in-from-right-5"
