@@ -1,5 +1,5 @@
 import Navbar from "../commponents/Navbar";
-import heroImage from "../assets/heroimage.png";
+import heroimage from "../assets/heroimage.png";
 import Footer from "../commponents/Footer";
 import { useNavigate } from "react-router-dom";
 
@@ -9,30 +9,30 @@ function WelCome() {
   
   return (
     <>
-      <div className="min-h-screen bg-gray-200 flex flex-col font-sans">
+      <div className="flex flex-col min-h-screen font-sans bg-gray-200">
         <Navbar />
 
-        <header className="flex-grow flex items-center justify-center">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 py-12 md:py-20">
-            <div className="flex flex-col-reverse md:flex-row items-center gap-12">
+        <header className="flex items-center justify-center flex-grow">
+          <div className="px-6 py-12 mx-auto max-w-7xl sm:px-8 md:py-20">
+            <div className="flex flex-col-reverse items-center gap-12 md:flex-row">
               {/* Left Side: Text Content */}
-              <div className="w-full md:w-1/2 text-center md:text-left">
-                <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-6 border border-blue-100">
+              <div className="w-full text-center md:w-1/2 md:text-left">
+                <span className="inline-block px-3 py-1 mb-6 text-sm font-semibold text-blue-600 border border-blue-100 rounded-full bg-blue-50">
                   🚀 AI-Powered Study Companion
                 </span>
 
-                <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+                <h1 className="mb-6 text-4xl font-extrabold leading-tight text-gray-900 md:text-6xl">
                   Study Smarter, <br className="hidden md:block" />
                   Not <span className="text-blue-500">Harder.</span>
                 </h1>
 
-                <p className="text-lg text-gray-500 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
+                <p className="max-w-lg mx-auto mb-8 text-lg leading-relaxed text-gray-500 md:mx-0">
                   Transform your messy lecture notes into clear summaries,
                   flashcards, and quizzes instantly. Just upload or speak, and
                   let AI do the rest.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+                <div className="flex flex-col items-center justify-center gap-4 sm:flex-row md:justify-start">
                   <button className="w-full sm:w-auto bg-blue-500 text-white px-8 py-3.5 rounded-full font-bold shadow-lg shadow-blue-200 hover:bg-blue-600 hover:shadow-blue-300 transform active:scale-95 transition-all duration-200" onClick={() => navigate('/auth/signup')}>
                     Get Started
                   </button>
@@ -47,36 +47,36 @@ function WelCome() {
                 </p>
               </div>
 
-              <div className="w-full md:w-1/2 flex justify-center">
+              <div className="flex justify-center w-full md:w-1/2">
                 <img
-                  src={heroImage}
+                  src={heroimage}
                   alt="Student relaxing while AI studies"
-                  className="w-full max-w-lg object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500"
+                  className="object-contain w-full max-w-lg transition-transform duration-500 drop-shadow-xl hover:scale-105"
                 />
               </div>
             </div>
           </div>
         </header>
 
-        <section className="bg-gray-50 py-20">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+        <section className="py-20 bg-gray-50">
+          <div className="px-6 mx-auto max-w-7xl sm:px-8">
+            <div className="mb-16 text-center">
+              <h2 className="mb-4 text-3xl font-bold text-gray-900">
                 Why use SmartNotes?
               </h2>
-              <p className="text-gray-500 max-w-2xl mx-auto">
+              <p className="max-w-2xl mx-auto text-gray-500">
                 Everything you need to ace your exams, powered by advanced AI
                 technology.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {/* Feature 1 */}
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl mb-6">
+              <div className="p-8 transition-shadow bg-white border border-gray-100 shadow-sm rounded-2xl hover:shadow-md">
+                <div className="flex items-center justify-center w-12 h-12 mb-6 text-2xl bg-blue-100 rounded-lg">
                   📝
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="mb-3 text-xl font-bold text-gray-900">
                   Instant Summaries
                 </h3>
                 <p className="text-gray-500">
@@ -86,11 +86,11 @@ function WelCome() {
               </div>
 
               {/* Feature 2 */}
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-2xl mb-6">
+              <div className="p-8 transition-shadow bg-white border border-gray-100 shadow-sm rounded-2xl hover:shadow-md">
+                <div className="flex items-center justify-center w-12 h-12 mb-6 text-2xl bg-purple-100 rounded-lg">
                   🧠
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="mb-3 text-xl font-bold text-gray-900">
                   AI Quiz Generator
                 </h3>
                 <p className="text-gray-500">
@@ -100,14 +100,14 @@ function WelCome() {
               </div>
 
               {/* Feature 3 */}
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="p-8 transition-shadow bg-white border border-gray-100 shadow-sm rounded-2xl hover:shadow-md">
                 {/* Icon Section - Changed to Orange/Amber for 'Ideas/Explanation' */}
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-2xl mb-6">
+                <div className="flex items-center justify-center w-12 h-12 mb-6 text-2xl bg-orange-100 rounded-lg">
                   💡
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="mb-3 text-xl font-bold text-gray-900">
                   Smart Explanations
                 </h3>
 
