@@ -1,5 +1,5 @@
 import Navbar from "../commponents/Navbar";
-import heroimage from "../assets/heroimage.png";
+import heroimage from "../assets/heroImage.png";
 import Footer from "../commponents/Footer";
 import { useNavigate } from "react-router-dom";
 
