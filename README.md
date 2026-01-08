@@ -157,4 +157,12 @@ Contributions are welcome.
 
 ---
 
+## 🌍 Live Deployment
+
+The Fron-end is deployed on Vercel.
+
+- **🚀 Live Fron-end URL:** [https://zippy-skunk-visun-72ceb542.koyeb.app](https://smart-note-platform-fe.vercel.app/)
+
+---
+
 Built with dedication for students 🚀
