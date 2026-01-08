@@ -3,7 +3,8 @@ import { refreshTokens } from "./auth";
 
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  // baseURL: "http://localhost:5000/api/v1",
+  baseURL:'zippy-skunk-visun-72ceb542.koyeb.app/api/v1',
   withCredentials: true
 })
 
