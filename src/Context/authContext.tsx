@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getMyDetials } from "../services/auth";
+import { getMyDetials, logOut } from "../services/auth";
 
 const AuthContext = createContext<any>(null);
 
@@ -14,15 +14,26 @@ export const AuthProvider = ({ children }: any) => {
           setUser(res.data);
         })
         .catch((err) => {
-          console.log("Token invalid or expired" , err);
+          console.log("Token invalid or expired", err);
           localStorage.removeItem("accessToken");
           setUser(null);
         });
     }
   }, []);
 
+  const logoutUser = async () => {
+    try {
+      await logOut(); 
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      localStorage.removeItem("accessToken");
+      setUser(null);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, logoutUser }}>
       {children}
     </AuthContext.Provider>
   );

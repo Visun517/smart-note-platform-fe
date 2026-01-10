@@ -13,7 +13,7 @@ import { logOut } from "../services/auth";
 const SideBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setUser } = useAuth();
+  const { setUser, logoutUser } = useAuth();
 
   const menuItems = [
     { path: "/app/dashboard", name: "Overview", icon: LayoutDashboard },
@@ -24,9 +24,7 @@ const SideBar = () => {
   ];
 
   const handleLogout = async () => {
-    localStorage.removeItem("accessToken");
-    setUser(null);
-    await logOut();
+    await logoutUser(); 
     navigate("/auth/login");
   };
 

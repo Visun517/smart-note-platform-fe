@@ -7,7 +7,7 @@ import {
   RefreshCw,
   ArrowRight,
 } from "lucide-react";
-import { saveQuizAttempt } from "../services/quizeattempt"; // Services Import
+import { saveQuizAttempt } from "../services/quizeattempt"; 
 import { getQuiz } from "../services/ai";
 import toast from "react-hot-toast";
 

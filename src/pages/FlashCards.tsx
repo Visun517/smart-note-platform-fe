@@ -60,11 +60,11 @@ function FlashCards({ noteId, flashcardProps }: FlashCardsViewProps) {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 pb-10">
+    <div className="max-w-6xl pb-10 mx-auto space-y-8">
       {/* --- Header Section --- */}
-      <div className="flex justify-between items-center bg-orange-50 p-4 rounded-xl border border-orange-100">
+      <div className="flex items-center justify-between p-4 border border-orange-100 bg-orange-50 rounded-xl">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-white rounded-lg shadow-sm text-orange-600">
+          <div className="p-2 text-orange-600 bg-white rounded-lg shadow-sm">
             <Layers size={24} />
           </div>
           <div>
@@ -97,7 +97,7 @@ function FlashCards({ noteId, flashcardProps }: FlashCardsViewProps) {
 
       {/* 1. Error State */}
       {error && (
-        <div className="flex items-center gap-2 p-4 text-red-700 bg-red-50 border border-red-200 rounded-xl">
+        <div className="flex items-center gap-2 p-4 text-red-700 border border-red-200 bg-red-50 rounded-xl">
           <AlertCircle size={20} />
           <span>{error}</span>
         </div>
@@ -105,7 +105,7 @@ function FlashCards({ noteId, flashcardProps }: FlashCardsViewProps) {
 
       {/* 2. Success State (Cards Grid) */}
       {cards.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => {
             const isFlipped = flippedCards[card._id];
 
@@ -113,7 +113,7 @@ function FlashCards({ noteId, flashcardProps }: FlashCardsViewProps) {
               <div
                 key={card._id}
                 onClick={() => handleFlip(card._id)}
-                className="group h-64 perspective-1000 cursor-pointer"
+                className="h-64 cursor-pointer group perspective-1000"
               >
                 {/* Inner Container (Rotation Logic) */}
                 <div
@@ -122,33 +122,33 @@ function FlashCards({ noteId, flashcardProps }: FlashCardsViewProps) {
                   `}
                 >
                   {/* --- FRONT SIDE (Question) --- */}
-                  <div className="absolute w-full h-full backface-hidden bg-white border border-gray-200 rounded-2xl p-6 flex flex-col justify-between">
-                    <div className="flex justify-between items-start">
-                      <span className="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-1 rounded uppercase">
+                  <div className="absolute flex flex-col justify-between w-full h-full p-6 bg-white border border-gray-200 backface-hidden rounded-2xl">
+                    <div className="flex items-start justify-between">
+                      <span className="px-2 py-1 text-xs font-bold text-orange-600 uppercase bg-orange-100 rounded">
                         Question
                       </span>
                       <RotateCw size={16} className="text-gray-300" />
                     </div>
-                    <p className="text-lg font-semibold text-gray-800 text-center">
+                    <p className="text-lg font-semibold text-center text-gray-800">
                       {card.front}
                     </p>
-                    <p className="text-xs text-gray-400 text-center mt-2">
+                    <p className="mt-2 text-xs text-center text-gray-400">
                       Click to flip
                     </p>
                   </div>
 
                   {/* --- BACK SIDE (Answer) --- */}
-                  <div className="absolute w-full h-full backface-hidden bg-orange-50 border border-orange-200 rounded-2xl p-6 flex flex-col justify-between rotate-y-180">
-                    <div className="flex justify-between items-start">
-                      <span className="bg-green-100 text-green-600 text-xs font-bold px-2 py-1 rounded uppercase">
+                  <div className="absolute flex flex-col justify-between w-full h-full p-6 border border-orange-200 backface-hidden bg-orange-50 rounded-2xl rotate-y-180">
+                    <div className="flex items-start justify-between">
+                      <span className="px-2 py-1 text-xs font-bold text-green-600 uppercase bg-green-100 rounded">
                         Answer
                       </span>
                       <RotateCw size={16} className="text-orange-300" />
                     </div>
-                    <p className="text-base text-gray-700 text-center leading-relaxed">
+                    <p className="text-base leading-relaxed text-center text-gray-700">
                       {card.back}
                     </p>
-                    <p className="text-xs text-orange-400 text-center mt-2">
+                    <p className="mt-2 text-xs text-center text-orange-400">
                       Click to flip back
                     </p>
                   </div>
@@ -161,7 +161,7 @@ function FlashCards({ noteId, flashcardProps }: FlashCardsViewProps) {
 
       {/* 3. Empty State */}
       {!cards.length && !loading && !error && (
-        <div className="flex flex-col items-center justify-center h-64 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400 bg-gray-50/50">
+        <div className="flex flex-col items-center justify-center h-64 text-gray-400 border-2 border-gray-200 border-dashed rounded-2xl bg-gray-50/50">
           <Layers size={48} className="mb-3 opacity-20" />
           <p>Click "Generate Cards" to create flashcards from your note.</p>
         </div>

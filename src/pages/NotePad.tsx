@@ -62,7 +62,7 @@ interface DrawingModalProps {
 const DrawingModal = ({ isOpen, onClose, onInsert }: DrawingModalProps) => {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
   const [strokeColor, setStrokeColor] = useState("black");
-  const [strokeWidth] = useState(4);
+  const [strokeWidth , setStrokeWidth] = useState(4);
 
   if (!isOpen) return null;
 

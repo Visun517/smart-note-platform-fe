@@ -4,17 +4,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 const WelCome = lazy(() => import("../pages/WelCome"));
 const AiWorkSpace = lazy(() => import("../pages/AiWorkSpace"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
-const Login = lazy(() => import("../pages/Login"));
-const NoteView = lazy(() => import("../commponents/NoteView"));
+const Login = lazy(() => import("../pages/auth/Login"));
+const NoteView = lazy(() => import("../pages/NoteView"));
 const Profile = lazy(() => import("../pages/ProfilePage"));
-const SignUp = lazy(() => import("../pages/SingUp"));
-const NoteList = lazy(() => import("../commponents/Notelist"));
+const SignUp = lazy(() => import("../pages/auth/SingUp"));
+const NoteList = lazy(() => import("../pages/Notelist"));
 const CreateNote = lazy(() => import("../pages/CreateNote"));
 const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"));
 const TrashBin = lazy(() => import("../pages/TrashBin"));
 import type { ReactNode } from "react";
-import AppShell from "../commponents/AppShell"; // your sidebar + navbar layout
+import AppShell from "../commponents/AppShell"; 
 import { Navigate } from "react-router-dom";
 
 

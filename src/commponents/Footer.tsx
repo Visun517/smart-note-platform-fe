@@ -2,24 +2,23 @@ import logo from "../assets/logo.png";
 
 function Footer() {
   return (
-    <footer className="bg-gray-100 border-t border-gray-100 pt-16 pb-8 font-sans">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <footer className="pt-16 pb-8 font-sans bg-gray-100 border-t border-gray-100">
+      <div className="px-6 mx-auto max-w-7xl sm:px-8">
         {/* --- Top Section: 4 Columns Grid --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 gap-12 mb-16 md:grid-cols-2 lg:grid-cols-4">
           {/* Column 1: Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              {/* Logo එක නැත්නම් text විතරක් පාවිච්චි කරන්න පුළුවන් */}
               <img
                 src={logo}
                 alt="SmartNotes Logo"
-                className="h-8 w-auto opacity-90"
+                className="w-auto h-8 opacity-90"
               />
               <span className="text-xl font-bold text-gray-900">
                 Smart<span className="text-blue-500">Notes</span>
               </span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-gray-500">
               Your AI-powered study companion. We turn messy lecture notes into
               clear summaries and quizzes instantly.
             </p>
@@ -27,25 +26,25 @@ function Footer() {
 
           {/* Column 2: Product Links */}
           <div>
-            <h3 className="font-bold text-gray-900 mb-4">Product</h3>
+            <h3 className="mb-4 font-bold text-gray-900">Product</h3>
             <ul className="space-y-3 text-sm text-gray-500">
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Features
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Pricing
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Testimonials
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Integration
                 </a>
               </li>
@@ -54,25 +53,25 @@ function Footer() {
 
           {/* Column 3: Company Links */}
           <div>
-            <h3 className="font-bold text-gray-900 mb-4">Company</h3>
+            <h3 className="mb-4 font-bold text-gray-900">Company</h3>
             <ul className="space-y-3 text-sm text-gray-500">
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Our Team
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Careers
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Contact
                 </a>
               </li>
@@ -81,25 +80,25 @@ function Footer() {
 
           {/* Column 4: Legal / Resources */}
           <div>
-            <h3 className="font-bold text-gray-900 mb-4">Resources</h3>
+            <h3 className="mb-4 font-bold text-gray-900">Resources</h3>
             <ul className="space-y-3 text-sm text-gray-500">
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Help Center
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-blue-500 transition-colors">
+                <a href="#" className="transition-colors hover:text-blue-500">
                   Terms of Service
                 </a>
               </li>
@@ -108,9 +107,9 @@ function Footer() {
         </div>
 
         {/* --- Bottom Section: Copyright & Socials --- */}
-        <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="flex flex-col items-center justify-between gap-4 pt-8 border-t border-gray-100 md:flex-row">
           {/* Copyright Text */}
-          <p className="text-gray-400 text-sm text-center md:text-left">
+          <p className="text-sm text-center text-gray-400 md:text-left">
             © 2024 SmartNotes AI. All rights reserved.
           </p>
 
@@ -118,11 +117,11 @@ function Footer() {
           <div className="flex gap-6">
             <a
               href="#"
-              className="text-gray-400 hover:text-blue-500 transition-colors"
+              className="text-gray-400 transition-colors hover:text-blue-500"
             >
               {/* Facebook Icon (SVG) */}
               <svg
-                className="h-5 w-5"
+                className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -136,11 +135,11 @@ function Footer() {
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-blue-500 transition-colors"
+              className="text-gray-400 transition-colors hover:text-blue-500"
             >
               {/* GitHub Icon (SVG) */}
               <svg
-                className="h-5 w-5"
+                className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"

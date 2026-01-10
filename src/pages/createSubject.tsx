@@ -123,15 +123,15 @@ const SubjectSelector = ({
 
       {isModalOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-sm p-6 rounded-2xl shadow-2xl transform transition-all animate-fade-in">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+          <div className="w-full max-w-sm p-6 transition-all transform bg-white shadow-2xl rounded-2xl animate-fade-in">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="flex items-center gap-2 text-lg font-bold text-gray-800">
                 <FolderOpen className="text-blue-500" size={20} />
                 New Folder
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-gray-400 hover:text-red-500 transition"
+                className="text-gray-400 transition hover:text-red-500"
               >
                 <X size={20} />
               </button>
@@ -144,20 +144,20 @@ const SubjectSelector = ({
               value={newSubjectName}
               onChange={(e) => setNewSubjectName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleCreate()}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-50 outline-none mb-6 text-gray-800 placeholder-gray-400"
+              className="w-full px-4 py-3 mb-6 text-gray-800 placeholder-gray-400 border border-gray-200 outline-none rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-50"
             />
 
-            <div className="flex gap-3 justify-end">
+            <div className="flex justify-end gap-3">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-lg text-gray-500 hover:bg-gray-100 font-medium text-sm transition"
+                className="px-4 py-2 text-sm font-medium text-gray-500 transition rounded-lg hover:bg-gray-100"
               >
                 Cancel
               </button>
               <button
                 onClick={handleCreate}
                 disabled={loading}
-                className="px-6 py-2 rounded-lg bg-blue-600 text-white font-bold text-sm shadow-lg hover:bg-blue-700 disabled:opacity-50 transition"
+                className="px-6 py-2 text-sm font-bold text-white transition bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 disabled:opacity-50"
               >
                 {loading ? "Creating..." : "Create"}
               </button>

@@ -50,9 +50,9 @@ function Explanation({ noteId, explanationProps }: ExplanationViewProps) {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* --- Header Section (Blue Theme) --- */}
-      <div className="flex justify-between items-center bg-blue-50 p-4 rounded-xl border border-blue-100">
+      <div className="flex items-center justify-between p-4 border border-blue-100 bg-blue-50 rounded-xl">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-white rounded-lg shadow-sm text-blue-600">
+          <div className="p-2 text-blue-600 bg-white rounded-lg shadow-sm">
             <BookOpen size={24} />
           </div>
           <div>
@@ -87,7 +87,7 @@ function Explanation({ noteId, explanationProps }: ExplanationViewProps) {
 
       {/* 1. Error State */}
       {error && (
-        <div className="flex items-center gap-2 p-4 text-red-700 bg-red-50 border border-red-200 rounded-xl">
+        <div className="flex items-center gap-2 p-4 text-red-700 border border-red-200 bg-red-50 rounded-xl">
           <AlertCircle size={20} />
           <span>{error}</span>
         </div>
@@ -95,14 +95,14 @@ function Explanation({ noteId, explanationProps }: ExplanationViewProps) {
 
       {/* 2. Success State (Content) */}
       {explanation && (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="flex justify-between items-start mb-4">
-            <h3 className="font-bold text-gray-700 flex items-center gap-2">
+        <div className="p-6 duration-500 bg-white border border-gray-200 shadow-sm rounded-2xl animate-in fade-in slide-in-from-bottom-4">
+          <div className="flex items-start justify-between mb-4">
+            <h3 className="flex items-center gap-2 font-bold text-gray-700">
               Detailed Breakdown:
             </h3>
             <button
               onClick={handleCopy}
-              className="text-gray-400 hover:text-gray-600 transition"
+              className="text-gray-400 transition hover:text-gray-600"
               title="Copy to clipboard"
             >
               {copied ? (
@@ -114,7 +114,7 @@ function Explanation({ noteId, explanationProps }: ExplanationViewProps) {
           </div>
 
           {/* Explanation Text */}
-          <div className="prose prose-blue max-w-none text-gray-700 leading-relaxed whitespace-pre-line">
+          <div className="leading-relaxed prose text-gray-700 whitespace-pre-line prose-blue max-w-none">
             {explanation}
           </div>
         </div>
@@ -122,7 +122,7 @@ function Explanation({ noteId, explanationProps }: ExplanationViewProps) {
 
       {/* 3. Empty State */}
       {!explanation && !loading && !error && (
-        <div className="flex flex-col items-center justify-center h-64 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400 bg-gray-50/50">
+        <div className="flex flex-col items-center justify-center h-64 text-gray-400 border-2 border-gray-200 border-dashed rounded-2xl bg-gray-50/50">
           <BookOpen size={48} className="mb-3 opacity-20" />
           <p>Click "Explain Note" to get a detailed breakdown.</p>
         </div>

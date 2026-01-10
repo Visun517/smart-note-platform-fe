@@ -33,7 +33,6 @@ api.interceptors.response.use(
 
     if (err.response?.status === 401 && !isPublic && !originalRequest._retry) {
       originalRequest._retry = true;
-      console.log(err.response?.status)
       try {
         const res = await refreshTokens();
         const newAccessToken = res.accessToken;
@@ -47,7 +46,6 @@ api.interceptors.response.use(
         
       } catch (error : any) {
         localStorage.removeItem('accessToken');
-        console.log(error.message)
         window.location.href = '/auth/login';
         return Promise.reject(error);
       }

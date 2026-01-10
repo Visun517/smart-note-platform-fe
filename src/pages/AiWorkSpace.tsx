@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FileText, BookOpen, BrainCircuit, Layers } from "lucide-react";
 
-import SummaryView from "../commponents/Summary";
-import ExplanationView from "../commponents/Exaplanation";
-import QuizView from "../commponents/Quiz";
-import FlashcardsView from "../commponents/FlashCards";
+import SummaryView from "./Summary";
+import ExplanationView from "./Exaplanation";
+import QuizView from "./Quiz";
+import FlashcardsView from "./FlashCards";
 import { getNoteById } from "../services/note";
 import { getAigeneratedContent } from "../services/aigeneratedContent";
+import TabButton from "../commponents/TabButton";
 
 const AiWorkspace = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const AiWorkspace = () => {
 
   const fetchAigeneratedContent = async (id: string | undefined) => {
     const aigeneratedContent = await getAigeneratedContent(id);
-    console.log(aigeneratedContent.data)
+    // console.log(aigeneratedContent.data)
     setAigeneratedContent(aigeneratedContent.data);
   };
   const fetchNoteById = async (id: string | undefined) => {
@@ -85,20 +86,5 @@ const AiWorkspace = () => {
     </div>
   );
 };
-
-const TabButton = ({ isActive, onClick, icon, label }: any) => (
-  <button
-    onClick={onClick}
-    className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-all border-b-2 
-      ${
-        isActive
-          ? "border-blue-600 text-blue-600 bg-blue-50/50"
-          : "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-      }`}
-  >
-    {icon}
-    <span>{label}</span>
-  </button>
-);
 
 export default AiWorkspace;

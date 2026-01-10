@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
 import { Save, Edit2 } from "lucide-react"; 
-import SubjectSelector from "../commponents/createSubject";
-import NotePad from "../commponents/NotePad";
+import SubjectSelector from "./createSubject";
+import NotePad from "./NotePad";
 import { createNnote, updateNoteById, getNoteById } from "../services/note";
 import toast from "react-hot-toast";
 
